@@ -116,8 +116,4 @@ MIT
 
 ## Author
 
-Ayhan AVCI 2018 
-
-ayhanavci@gmail.com 
-
-[lain.run](https://lain.run)
+tnvraghu@gmail.com 

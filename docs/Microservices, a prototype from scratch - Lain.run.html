@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://lain.run/projects/Microservices/ -->
+<html lang="en" class="js fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+<!-- begin _includes/seo.html --><title>Microservices, a prototype from scratch - Lain.run</title>
+<meta name="description" content="Microservices, with concepts implemented. ">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Lain.run">
+<meta property="og:title" content="Microservices, a prototype from scratch">
+<meta property="og:url" content="https://lain.run/projects/Microservices/">
+
+
+  <meta property="og:description" content="Microservices, with concepts implemented. (by Ayhan Avcı)">
+
+
+
+  <meta property="og:image" content="https://lain.run/assets/images/simplicity1.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2021-01-01T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<style type="text/css">svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;-webkit-box-sizing:border-box;box-sizing:border-box;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.33333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}</style><link rel="canonical" href="https://lain.run/projects/Microservices/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": " ",
+      "url": "https://lain.run",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="https://lain.run/feed.xml" type="application/atom+xml" rel="alternate" title="Lain.run Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="./Microservices, a prototype from scratch - Lain.run_files/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://lain.run/assets/favicon/favicon-144x144.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://lain.run/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://lain.run/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="https://lain.run/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="https://lain.run/assets/favicon/favicon.ico" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+  <style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
+
+  <body class="layout--single" style="margin-bottom: 180.75px;">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lain.run/">Lain.run</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://lain.run/posts/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://lain.run/works/">Past Works</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button" count="0" style="">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope="" itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="./Microservices, a prototype from scratch - Lain.run_files/abc.png" alt="  " itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">  </h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope="" itemtype="https://schema.org/Place">
+          <svg class="svg-inline--fa fa-map-marker-alt fa-w-12 fa-fw" aria-hidden="true" data-prefix="fas" data-icon="map-marker-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"></path></svg><!-- <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> --> <span itemprop="name">  </span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:raghu.nt@ltts.com">
+            <meta itemprop="email" content="mailto:raghu.nt@ltts.com">
+            <svg class="svg-inline--fa fa-envelope-square fa-w-14 fa-fw" aria-hidden="true" data-prefix="fas" data-icon="envelope-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M400 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM178.117 262.104C87.429 196.287 88.353 196.121 64 177.167V152c0-13.255 10.745-24 24-24h272c13.255 0 24 10.745 24 24v25.167c-24.371 18.969-23.434 19.124-114.117 84.938-10.5 7.655-31.392 26.12-45.883 25.894-14.503.218-35.367-18.227-45.883-25.895zM384 217.775V360c0 13.255-10.745 24-24 24H88c-13.255 0-24-10.745-24-24V217.775c13.958 10.794 33.329 25.236 95.303 70.214 14.162 10.341 37.975 32.145 64.694 32.01 26.887.134 51.037-22.041 64.72-32.025 61.958-44.965 81.325-59.406 95.283-70.199z"></path></svg><!-- <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> --> Email
+          </a>
+        </li>
+      
+      
+
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+      
+
+      
+
+      
+
+      
+      
+
+      
+
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope="" itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Microservices, a prototype from scratch">
+    <meta itemprop="description" content="Microservices summarized. A fully working prototype is presented with the source code and documentation.">
+    <meta itemprop="datePublished" content="January 01, 2021">
+    
+
+    <div class="page__inner-wrap">
+      
+        
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Microservices, a prototype from scratch
+</h1>
+          <!-- AYHAN NEW -->
+         <p class="page__meta">
+           
+             <svg class="svg-inline--fa fa-calendar fa-w-14 fa-fw" aria-hidden="true" data-prefix="fa" data-icon="calendar" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"></path></svg><!-- <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> --> <time datetime="2021-01-01T00:00:00+00:00">January 01, 2021 </time> 
+           
+           <svg class="svg-inline--fa fa-clock-o fa-w-16" aria-hidden="true" data-prefix="fa" data-icon="clock-o" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><g><path fill="currentColor" d="M156.5,447.7l-12.6,29.5c-18.7-9.5-35.9-21.2-51.5-34.9l22.7-22.7C127.6,430.5,141.5,440,156.5,447.7z M40.6,272H8.5 c1.4,21.2,5.4,41.7,11.7,61.1L50,321.2C45.1,305.5,41.8,289,40.6,272z M40.6,240c1.4-18.8,5.2-37,11.1-54.1l-29.5-12.6 C14.7,194.3,10,216.7,8.5,240H40.6z M64.3,156.5c7.8-14.9,17.2-28.8,28.1-41.5L69.7,92.3c-13.7,15.6-25.5,32.8-34.9,51.5 L64.3,156.5z M397,419.6c-13.9,12-29.4,22.3-46.1,30.4l11.9,29.8c20.7-9.9,39.8-22.6,56.9-37.6L397,419.6z M115,92.4 c13.9-12,29.4-22.3,46.1-30.4l-11.9-29.8c-20.7,9.9-39.8,22.6-56.8,37.6L115,92.4z M447.7,355.5c-7.8,14.9-17.2,28.8-28.1,41.5 l22.7,22.7c13.7-15.6,25.5-32.9,34.9-51.5L447.7,355.5z M471.4,272c-1.4,18.8-5.2,37-11.1,54.1l29.5,12.6 c7.5-21.1,12.2-43.5,13.6-66.8H471.4z M321.2,462c-15.7,5-32.2,8.2-49.2,9.4v32.1c21.2-1.4,41.7-5.4,61.1-11.7L321.2,462z M240,471.4c-18.8-1.4-37-5.2-54.1-11.1l-12.6,29.5c21.1,7.5,43.5,12.2,66.8,13.6V471.4z M462,190.8c5,15.7,8.2,32.2,9.4,49.2h32.1 c-1.4-21.2-5.4-41.7-11.7-61.1L462,190.8z M92.4,397c-12-13.9-22.3-29.4-30.4-46.1l-29.8,11.9c9.9,20.7,22.6,39.8,37.6,56.9 L92.4,397z M272,40.6c18.8,1.4,36.9,5.2,54.1,11.1l12.6-29.5C317.7,14.7,295.3,10,272,8.5V40.6z M190.8,50 c15.7-5,32.2-8.2,49.2-9.4V8.5c-21.2,1.4-41.7,5.4-61.1,11.7L190.8,50z M442.3,92.3L419.6,115c12,13.9,22.3,29.4,30.5,46.1 l29.8-11.9C470,128.5,457.3,109.4,442.3,92.3z M397,92.4l22.7-22.7c-15.6-13.7-32.8-25.5-51.5-34.9l-12.6,29.5 C370.4,72.1,384.4,81.5,397,92.4z"></path><circle fill="currentColor" cx="256" cy="364" r="28"><animate attributeType="XML" repeatCount="indefinite" dur="2s" attributeName="r" values="28;14;28;28;14;28;"></animate><animate attributeType="XML" repeatCount="indefinite" dur="2s" attributeName="opacity" values="1;0;1;1;0;1;"></animate></circle><path fill="currentColor" opacity="1" d="M263.7,312h-16c-6.6,0-12-5.4-12-12c0-71,77.4-63.9,77.4-107.8c0-20-17.8-40.2-57.4-40.2c-29.1,0-44.3,9.6-59.2,28.7 c-3.9,5-11.1,6-16.2,2.4l-13.1-9.2c-5.6-3.9-6.9-11.8-2.6-17.2c21.2-27.2,46.4-44.7,91.2-44.7c52.3,0,97.4,29.8,97.4,80.2 c0,67.6-77.4,63.5-77.4,107.8C275.7,306.6,270.3,312,263.7,312z"><animate attributeType="XML" repeatCount="indefinite" dur="2s" attributeName="opacity" values="1;0;0;0;0;1;"></animate></path><path fill="currentColor" opacity="0" d="M232.5,134.5l7,168c0.3,6.4,5.6,11.5,12,11.5h9c6.4,0,11.7-5.1,12-11.5l7-168c0.3-6.8-5.2-12.5-12-12.5h-23 C237.7,122,232.2,127.7,232.5,134.5z"><animate attributeType="XML" repeatCount="indefinite" dur="2s" attributeName="opacity" values="0;0;1;1;0;0;"></animate></path></g></svg><!-- <i class="fa fa-clock-o" aria-hidden="true"></i> -->&nbsp;
+
+
+
+
+  18 minute read
+
+         </p>
+         <!-- end AYHAN NEW -->
+         <!-- AYHAN OLD 
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  18 minute read
+</p>           
+         
+         -->
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <aside class="sidebar__right">
+<nav class="toc">
+    <header><h4 class="nav__title"><svg class="svg-inline--fa fa-list-ul fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="list-ul" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M96 96c0 26.51-21.49 48-48 48S0 122.51 0 96s21.49-48 48-48 48 21.49 48 48zM48 208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm0 160c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm96-236h352c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H144c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h352c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H144c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h352c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H144c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg><!-- <i class="fas fa-list-ul"></i> --> Contents</h4></header>
+<ul class="toc__menu" id="markdown-toc">
+  <li><a href="https://lain.run/projects/Microservices/#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="https://lain.run/projects/Microservices/#goals" id="markdown-toc-goals">Goals</a></li>
+  <li><a href="https://lain.run/projects/Microservices/#microservices-architecture" id="markdown-toc-microservices-architecture">Microservices Architecture</a>    <ul>
+      <li><a href="https://lain.run/projects/Microservices/#cqrs" id="markdown-toc-cqrs">CQRS</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#saga" id="markdown-toc-saga">Saga</a></li>
+    </ul>
+  </li>
+  <li><a href="https://lain.run/projects/Microservices/#the-software" id="markdown-toc-the-software">The Software</a>    <ul>
+      <li><a href="https://lain.run/projects/Microservices/#user-stories" id="markdown-toc-user-stories">User Stories</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#topology" id="markdown-toc-topology">Topology</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#modules" id="markdown-toc-modules">Modules</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#platform-agnostic-design" id="markdown-toc-platform-agnostic-design">Platform Agnostic Design</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#aggregates" id="markdown-toc-aggregates">Aggregates</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#the-data-model" id="markdown-toc-the-data-model">The Data Model</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#communication-model" id="markdown-toc-communication-model">Communication Model</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#order-saga" id="markdown-toc-order-saga">Order Saga</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#docker-containers" id="markdown-toc-docker-containers">Docker Containers</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#restful-web-services" id="markdown-toc-restful-web-services">RESTful Web Services</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#tools" id="markdown-toc-tools">Tools</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#consumers" id="markdown-toc-consumers">Consumers</a></li>
+      <li><a href="https://lain.run/projects/Microservices/#running-the-project" id="markdown-toc-running-the-project">Running the Project</a></li>
+    </ul>
+  </li>
+  <li><a href="https://lain.run/projects/Microservices/#source-code" id="markdown-toc-source-code">Source Code</a></li>
+  <li><a href="https://lain.run/projects/Microservices/#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ul>
+
+  </nav>
+</aside>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>I have been exploring software architectural patterns and I’ve spent some time on microservices. It has been a hot topic for the past couple of years. I took some notes while researching and wrote some pseudo code. As I went deeper, I kept on writing some small pieces of code along with my notes. Eventually I have decided to turn it into a working software. And here we are. This article and the software attached to it are the products of my self study journey.</p>
+
+<h1 id="goals">Goals</h1>
+
+<ul>
+  <li>
+    <p>Design and implement common Microservice concepts. Implementation should be a fully functional.</p>
+  </li>
+  <li>
+    <p>Lean, proof of concept grade source code. Not production grade.</p>
+  </li>
+  <li>
+    <p>Keep the business model simple. This is about the technology, not the business domain.</p>
+  </li>
+  <li>
+    <p>Use wide variety of technologies, programming languages to demonstrate the atomic and flexible nature of microservices.</p>
+  </li>
+  <li>
+    <p>Avoid using any technology or ready solutions specific to microservices. Only use general purpose technologies. All libraries and platforms should also be free to use.</p>
+  </li>
+  <li>
+    <p>Implement a basic event store, api gateway, various web services and multiple consumers.</p>
+  </li>
+  <li>
+    <p>Test and upload the source code with its documentation.</p>
+  </li>
+</ul>
+
+<h1 id="microservices-architecture">Microservices Architecture</h1>
+
+<p>Microservice architecture focuses on building single function modules with well defined interfaces and operations. Microservices divides the solution into atomic business modules, and helps create a flexible and scalable product. In microservices, the modules of the end product are distinct and loosely coupled / decoupled.</p>
+
+<p><strong>Domain Driven Design</strong>: Domain Driven Design is an approach to developing software systems, and in particular systems that are complex, that have ever-changing business rules, and that you expect to last for the long term within the enterprise.</p>
+
+<p><strong>Decomposition and Aggregates</strong>: Divide and conquer strategy for domain driven design. You break the domain down into subdomains and define the relationship between them. This helps understanding and defining the parts and the steps of your software solution, and create a stable, modular system.</p>
+
+<p><strong>Service Discovery / Registration</strong>: The architecture being modular and flexible creates a context that any service could be added to the system from any location at any time and they should be accessible. This requires an API gateway in which consumer applications can meet with the services. The services could be discovered from a central mechanism (Discovery), or each service could send their location information whenever they are up and running (Registration).</p>
+
+<h2 id="cqrs">CQRS</h2>
+
+<p>At its core, Command &amp; Query Responsibility Segregation is separating read and write operations. The idea is that recording a data should have no side effect on how you read it and vice versa. In practice, this approach separates read and write databases. Event Sourcing usually goes together with CQRS pattern.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/cqrs.png" alt="classicdb"></p>
+
+<p>Figure 1. CQRS pattern simplified</p>
+
+<p><strong>Event Sourcing</strong>: Event sourcing is a way of persisting your application’s state by storing the history that determines the current state of your application. You record everything that has occured in a stack fashion (only appends). This allows easy rollback transactions and data audit. Recording the data becomes very simple and high performance. Microsoft has a great <a href="https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing">ebook here</a></p>
+
+<p><strong>Event Store Pattern</strong>: Event store is a type of database system, optimized for storage of events. It has a record focused database and provides API for the services that may want to use the store.</p>
+
+<p><strong>Database Per Service</strong>: Each service having its own private database helps decoupling them. Each aggregate only needs some part of the data. So it makes sense to create a small part of the full database. CQRS pattern along with an event bus helps us keep the data distributed and relevant to each service.</p>
+
+<h2 id="saga">Saga</h2>
+
+<p>Business transactions spanning multiple services require a mechanism to ensure data consistency across services. The Saga pattern manages failures, ensures consistency and correctness across microservices. A saga is a sequence of local transactions. Sagas are used as state machines that coordinate components of the whole. There are two types;</p>
+
+<p><strong>Event Broker Pattern - Choreography</strong>: There is no central coordination. Each service produces events when a certain action occurs and knows how to respond to events. So the responsibility of the full transaction is distributed among services.</p>
+
+<p><strong>Event Mediator Pattern - Orchestration / Controller / Processor</strong>: There is a central service responsible solely for coordination of other services and the workflow.</p>
+
+<h1 id="the-software">The Software</h1>
+
+<p>The business domain I chose is one of the most classic ones so it is very easy to grasp: A shopping app.</p>
+
+<h2 id="user-stories">User Stories</h2>
+
+<p>Template: As a [ USER ] I want to [ ACTION ] So that [ REASONING ]</p>
+
+<p>User Personas:</p>
+
+<ol>
+  <li>Customer</li>
+  <li>Product Manager</li>
+</ol>
+
+<p>Features:</p>
+
+<ol>
+  <li>View Products</li>
+  <li>Shop</li>
+  <li>View Order Status</li>
+  <li>View User Profile</li>
+  <li>Get Invoice</li>
+  <li>Modify products, prices, stocks</li>
+  <li>Modify user credits</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>User Story</th>
+      <th>Acceptance Criteria</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>As a customer, I want to browse for products so that I can place an order.</td>
+      <td>View product categories<br>View Products<br>Ability to order each product<br>Get an Invoice</td>
+    </tr>
+    <tr>
+      <td>As a customer, I want to view my past orders so that it guides my future purposes.</td>
+      <td>View orders. Display order status, product info, order date</td>
+    </tr>
+    <tr>
+      <td>As a customer, I want to view my profile information so that I can make adjustments.</td>
+      <td>View user information and credit<br>Edit name, password, email</td>
+    </tr>
+    <tr>
+      <td>As a product manager, I want to add/edit/delete products so that customers can buy them</td>
+      <td>View/Add/Edit/Delete products. Names, prices, suppliers, units in stock</td>
+    </tr>
+    <tr>
+      <td>As a product manager, I want to view all customer order states so that I can assist if needed</td>
+      <td>View all orders and their states history in the system</td>
+    </tr>
+    <tr>
+      <td>As a product manager, I want to edit customer credit so that they can purchase products</td>
+      <td>View all users and their credit<br>Edit credits</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table 1. User Stories</p>
+
+<h2 id="topology">Topology</h2>
+
+<p>Modules are scalable and distributed. The design allows decoupled integration of any number of modules developed in any language and deployed anywhere. A new service only needs to be able to access the Event Bus. You can pick the modules and deploy them anywhere as long as it is accessible to Docker network. For instance, I added Accounting service after the system was completed already.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/allsystem.png" alt="allsystem">
+Figure 2. Communication Topology</p>
+
+<h2 id="modules">Modules</h2>
+
+<p>I used Python with Flask often because it is arguably one of the fastest and cleanest ways to prototype anything. I used others just for the sake of having a variety. For Event Store, I used two docker containers. SDK to build for Linux, Runtime for deployment</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Module</th>
+      <th>Category</th>
+      <th>Programming Language</th>
+      <th>Sdk</th>
+      <th>Docker</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ECommerce Website</td>
+      <td>Consumer</td>
+      <td>Python</td>
+      <td>Flask</td>
+      <td><a href="https://hub.docker.com/_/python/">python:alpine</a></td>
+    </tr>
+    <tr>
+      <td>Manager Website</td>
+      <td>Consumer</td>
+      <td>Python</td>
+      <td>Flask</td>
+      <td><a href="https://hub.docker.com/_/python/">python:alpine</a></td>
+    </tr>
+    <tr>
+      <td>Native Android Application</td>
+      <td>Consumer</td>
+      <td>Java</td>
+      <td>Android SDK</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Accounting Database</td>
+      <td>Database</td>
+      <td>-</td>
+      <td>-</td>
+      <td><a href="https://hub.docker.com/_/couchdb">couchdb:latest</a></td>
+    </tr>
+    <tr>
+      <td>Customer Database</td>
+      <td>Database</td>
+      <td>-</td>
+      <td>-</td>
+      <td><a href="https://hub.docker.com/_/redis">redis:alpine</a></td>
+    </tr>
+    <tr>
+      <td>Event Store Database</td>
+      <td>Database</td>
+      <td>-</td>
+      <td>-</td>
+      <td><a href="https://hub.docker.com/_/mongo">mongo</a><br><a href="https://hub.docker.com/_/mongo-express">mongo-express</a></td>
+    </tr>
+    <tr>
+      <td>Order Database</td>
+      <td>Database</td>
+      <td>-</td>
+      <td>-</td>
+      <td><a href="https://hub.docker.com/_/postgres">postgres:alpine</a></td>
+    </tr>
+    <tr>
+      <td>Event Bus</td>
+      <td>Support Tool</td>
+      <td>-</td>
+      <td>-</td>
+      <td><a href="https://hub.docker.com/_/rabbitmq">rabbitmq:management</a></td>
+    </tr>
+    <tr>
+      <td>Event Store</td>
+      <td>Support Tool</td>
+      <td>C#</td>
+      <td>.NET Core 2.1</td>
+      <td><a href="https://hub.docker.com/r/microsoft/dotnet">dotnet:2.1-sdk</a> <br> <a href="https://hub.docker.com/r/microsoft/dotnet">dotnet:2.1-aspnetcore-runtime</a></td>
+    </tr>
+    <tr>
+      <td>Reverse Proxy</td>
+      <td>Support Tool</td>
+      <td>-</td>
+      <td>-</td>
+      <td><a href="https://hub.docker.com/_/nginx">nginx:alpine</a></td>
+    </tr>
+    <tr>
+      <td>Accounting Web Service</td>
+      <td>Web Service</td>
+      <td>Javascript</td>
+      <td>Node</td>
+      <td><a href="https://hub.docker.com/_/node">node:alpine</a></td>
+    </tr>
+    <tr>
+      <td>Customer Web Service</td>
+      <td>Web Service</td>
+      <td>Python</td>
+      <td>Flask</td>
+      <td><a href="https://hub.docker.com/_/python/">python:alpine</a></td>
+    </tr>
+    <tr>
+      <td>Order Web Service</td>
+      <td>Web Service</td>
+      <td>Java</td>
+      <td>JDK-Jersey</td>
+      <td><a href="https://hub.docker.com/_/maven">maven:3.6-jdk-8-alpine</a></td>
+    </tr>
+    <tr>
+      <td>Product Web Service</td>
+      <td>Web Service</td>
+      <td>Python</td>
+      <td>Flask</td>
+      <td><a href="https://hub.docker.com/_/python/">python:alpine</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table 2. Modules</p>
+
+<h2 id="platform-agnostic-design">Platform Agnostic Design</h2>
+
+<p>In microservices, it is important to be flexible and dynamic. These are the design principles related to that.</p>
+
+<ul>
+  <li>
+    <p>Any module can be implemented in any programming language as long as the established communication is satisfied. There can be any number of modules attached to the system later on.</p>
+  </li>
+  <li>
+    <p>All services provide Rest API with Json objects. So virtually any consumer can communicate with them.</p>
+  </li>
+  <li>
+    <p>Any module can use whatever database it wants.</p>
+  </li>
+  <li>
+    <p>There is a single Event Store (can be clustered). Modules send write requests there through Event Bus. They don’t need to know how, when and where the data is written.</p>
+  </li>
+  <li>
+    <p>All modules are dockerized with Dockerfile and Docker Compose file provided. So they can be run on any host machine without having to know anything about it.</p>
+  </li>
+  <li>
+    <p>All modules have a defined Docker network name. So they have their own network in which they communicate with each other. The host network is irrelevant as long as Docker runs on it.</p>
+  </li>
+</ul>
+
+<h2 id="aggregates">Aggregates</h2>
+
+<p>Business model that is sufficiently decomposed, simplified and satisfies all of the user stories is as follows.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/aggregates.png" alt="Aggregates">
+Figure 3. Aggregates Diagram</p>
+
+<h2 id="the-data-model">The Data Model</h2>
+
+<ul>
+  <li>Event Store Database: MongoDB. Keeps Json data. Never updates or deletes. Just appends (insert).</li>
+  <li>Customer Database: Redis. Keeps key-value pairs. Key is username, value is user data.</li>
+  <li>Product Database: SQLite. Category - Product relational model. Since this is an SQLite database, it has limitations on scaling.</li>
+  <li>Order Database: PostgreSQL. Records Orders and states.</li>
+  <li>Accounting Database: CouchDB. Records Invoices after an Order is finalized.</li>
+</ul>
+
+<p>The key here is that everything worth recording must be first recorded on the Event Store since this is the source of all real data. The other databases are all just for reading. Below is a small sample on how it works. If a client asks for products (GET method), then the service queries its local database and returns the results without having to deal with the event store. But if the client performs an add/update/delete operation (POST method) then the service first ensure the Event Store records it first. Then it updates its own database as well.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/cqrssequence.png" alt="cqrssequence">
+Figure 4. CQRS in action</p>
+
+<p><strong>How Data Looks Like</strong>: To demonstrate how data is stored on each database, consider the following scenario;</p>
+
+<ol>
+  <li>Product Manager logs in, <strong>Adds</strong> a new product.</li>
+  <li>Product Manager decides he made a mistake in parameters, <strong>Updates</strong> the product he just created</li>
+  <li>A Customer opens the app on his smart phone, takes a look at the products and decides to <strong>Order</strong> the product that was previously recorded.</li>
+  <li>The Order Saga communications occur and the system <strong>Approves</strong> the order and it is now ready to get shipped.</li>
+  <li>The Customer decides he needs more money after the purchase and asks Product Manager to increase his credit. Product Manager <strong>Updates</strong> the Customer’s credit.</li>
+</ol>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/addproduct.png" alt="addproduct" height="335px" width="256px"></p>
+
+<p>Figure 5. Product manager adds a product</p>
+
+<p>Event Store after these events occur:</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/eventstoredata.png" alt="eventstoredata"></p>
+
+<p>Figure 6. Event Store after the story.</p>
+
+<p>There are NO updates or deletes actually happening in the Event Store. Only inserts. The Update Json message here doesn’t update any previous record. Every event is just stacked on top of each other with its Json Object. Below is how a stored json looks like for adding a product.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/storedjsonsample.png" alt="storedjsonsample"></p>
+
+<p>Figure 7. Stored Json for Add Product event.</p>
+
+<p>This is how synchronized data is stored. After Event Store secures the data, it fires an event through the Event Bus, notifying all interested parties that a new record is made. And they also update their local databases, if they require to do so.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/productlocaldb.png" alt="productlocaldb">
+Figure 8. Product Database after the story</p>
+
+<p>Order Service keeps the latest state of the Order and Customer service keeps the latest Credit score of the Customer. It just keeps the latest state of the order. Each web service uses their local database when their GET methods are invoked.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/orderlocaldb.png" alt="orderlocaldb">
+Figure 9. Order Database after the story</p>
+
+<p>Customer database on Redis.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/customerlocaldb.png" alt="customerlocaldb"></p>
+
+<p>Figure 10. Customer Database after the story</p>
+
+<h2 id="communication-model">Communication Model</h2>
+
+<ul>
+  <li>The web services provide Restful Http Web Services to communicate with the consumers.</li>
+  <li>The services also communicate with each other through an Event Bus. The Event Bus I used is RabbitMQ, uses Amqp.</li>
+  <li>These are happening within docker containers so there is also Docker networking involved in all of these communications.</li>
+</ul>
+
+<p><strong>Event Bus</strong>:  Event bus is a software architectural pattern which allows the parts of your solution communicate with each other without having to know each other’s location or even existence. Instead of directly sending events to its recipient, modules send it to the event bus. Each service just responds to the events it subscribed to. Web services do NOT and should not call each other’s API otherwise you are going to get a very messy, tightly coupled design. <a href="https://www.rabbitmq.com/">RabbitMQ</a> is perfect for all of this.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/eventbus.png" alt="eventbus"></p>
+
+<p>Figure 11. Event Bus</p>
+
+<p>Rabbit MQ supports several software patterns such as Publish/Subscribe, Topic, Work Queues and RPCs. It is best to check the <a href="https://www.rabbitmq.com/getstarted.html">official web site</a> to learn about how these patterns work. But here is an intro:</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/rabbit1.png" alt="rabbit1"></p>
+
+<p>Figure 12. Producer - Consumer model with Queues, Exchanges and Routing keys</p>
+
+<p>Any application can publish events into any routing key through any exchange. Interested consumers can create their own queues and wait for the messages they have subscribed into. In this example Consumer 1 is interested in Key 1, Consumer 2 is interested in Key 2 and Consumer 3 is interested in both types of events.</p>
+
+<p>In the source code, I made all the messages persistent. So even if one of the services crashes, the message stays in the event bus and the service is going to retrieve it when it is up and running.</p>
+
+<p>Below is how Event Store communicates with services to record and publish events.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/eventbusrouting1.png" alt="eventbusrouting1"></p>
+
+<p>Figure 13. Event Store communication with Services over Event Bus</p>
+
+<p>First one is when services POST api are called so each service decides to record the data on the Event Store. The following three are the responses. And the last one is event broadcast on the Event Bus.</p>
+
+<p>And below is how communication for Order Saga occurs. Notice that queues and Exchange names are re-used but routing keys are not.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/eventbusrouting2.png" alt="eventbusrouting2"></p>
+
+<p>Figure 14. Event Saga communication between Services over Event Bus</p>
+
+<h2 id="order-saga">Order Saga</h2>
+
+<p>This is the one and only saga that spans over all services. Everything begins when a customer likes a product and places an order. To keep messages simple, he can place one product at a time so there is no shopping chart.</p>
+
+<p>Prelude:</p>
+
+<ol>
+  <li>Customer places an order on a product</li>
+  <li>eCommerce website or eCommerce android application sends the request to reverse proxy.</li>
+  <li>Reverse proxy redirects the requests to Order web service</li>
+  <li>Order Web service starts the Order Saga</li>
+</ol>
+
+<p>The Order choreography:</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/ordersaga.png" alt="Order Saga"></p>
+
+<p>Figure 15: Order Saga Sequence Diagram</p>
+
+<p>I have excluded some of the rollback transactions. The only checks here are if the product is in store and if the user has enough credits to buy it.</p>
+
+<ol>
+  <li>Order service sends a place order message to Event Store.</li>
+  <li>Event Store records the request. Tells Order service that the request is approved. Order service updates its query db.</li>
+  <li>Order service starts the saga. Through Event Bus, it makes a broadcast to everything that listens to the saga events.</li>
+  <li>Product, Customer and Accounting services are interested in the saga.
+    <ul>
+      <li>Product service sends the price &amp; stock information to the Order Service.</li>
+      <li>Customer service sends the credit information to the Order Service.</li>
+    </ul>
+  </li>
+  <li>Order service checks if the product is in stock and the customer has enough credits and approves/denies the purchase.</li>
+  <li>Event Store records the purchase and responds to Order Service to finalize.</li>
+  <li>Order Service updates it Query database. Broadcasts to all recepients that an Order is finalized.
+    <ul>
+      <li>Product service reduces the units in stock.</li>
+      <li>Customer service reduces the customer credit.</li>
+      <li>Accounting service creates an invoice.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>In a very basic representation, if you remove everything related to distributed microservice architecture and asynchronous working, this flowchart is what the order saga essentially does.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/orderflowchart.png" alt="Order Flow"></p>
+
+<p>Figure 16: Old school flowchart</p>
+
+<h2 id="docker-containers">Docker Containers</h2>
+
+<p>From the Docker website: Docker containers are a key enabling technology for microservices, providing a lightweight encapsulation of each component so that it is easier to maintain and update independently. With Docker Enterprise, you can independently deploy and scale each microservice, coordinate their deployment through Swarm or Kubernetes orchestration and collaborate across teams through a consistent way of defining applications.</p>
+
+<p>I encapsulated all modules in Linux dockers except for the android application. I used Alpine when available. It is the most lightweight option. For each and every one of the modules, there is a docker compose file. In most docker compose files, you can see “msdemo” name. It is the prefix I came up with, meaning: <strong>“Micro Services Demonstration”</strong>.</p>
+
+<p>In most of the cases I used shell scripts to automate building the source code &amp; executing the binaries. Most of them are named <code class="highlighter-rouge">run.sh</code> and some of them are <code class="highlighter-rouge">build.sh</code>. Each module should be up and ready simply by calling <code class="highlighter-rouge">docker-compose up</code> from terminal on root folder of the module. The only exception is CouchDB which requires creating the user database explicitly.</p>
+
+<p><strong>Networks</strong>: I have created more than necessary amount of docker networks just to demonstrate how granular and flexible the networking can be done. For instance, Order service and Order database have their own private network so that nothing outside can access the Order database.</p>
+
+<p>Here is a list of docker networks on my machine. A good amount of them are used for this project.
+<img src="./Microservices, a prototype from scratch - Lain.run_files/networkslist.png" alt="networkslist"></p>
+
+<p>Figure 17: Docker Networks</p>
+
+<h2 id="restful-web-services">RESTful Web Services</h2>
+
+<p>Representational State Transfer is a software architectural style that defines a set of constraints to be used for creating web services. REST is web standards based architecture and uses HTTP Protocol. It revolves around resource where every component is a resource and a resource is accessed by a common interface using HTTP standard methods. In my implementation, web services provide GET and POST methods only accepting and producing Json data.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Customer (Python)</th>
+      <th>Order Service(Java)</th>
+      <th>Product Service(Python)</th>
+      <th>Accounting Service(JS)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>login-user</td>
+      <td>place-order</td>
+      <td>get-products</td>
+      <td>get-revenue</td>
+    </tr>
+    <tr>
+      <td>add-user</td>
+      <td>get-orders</td>
+      <td>get-all-products</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>update-user</td>
+      <td>&nbsp;</td>
+      <td>get-product-details</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>get-user</td>
+      <td>&nbsp;</td>
+      <td>add-new-product</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>get-all-users</td>
+      <td>&nbsp;</td>
+      <td>update-product</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>get-credit</td>
+      <td>&nbsp;</td>
+      <td>delete-product</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>set-credit</td>
+      <td>&nbsp;</td>
+      <td>get-categories</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>add-new-category</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>update-category</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>delete-category</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table 3. Services and API</p>
+
+<h2 id="tools">Tools</h2>
+
+<p>These provide the system ability to communicate.</p>
+
+<p><strong>Event Bus</strong>: Previously explained on the communication model. RabbitMQ on a docker container acts as the Event Bus.</p>
+
+<p><strong>Event Store Implementation</strong>: C# .NET Core application that does the following;</p>
+
+<ol>
+  <li>Receives write requests from services</li>
+  <li>Stores the request</li>
+  <li>Sends write success to the requesting service</li>
+  <li>Publishes the change</li>
+</ol>
+
+<p><strong>Reverse Proxy</strong>: I wouldn’t use any premade service discovery or registry solutions. One could be implemented from scratch but I just wasn’t interested. Reverse proxy seemed like a good enough replacement.
+The reverse proxy acts as an API gateway. I have dockerized and configured a Nginx server and placed it inside the docker network. It detects the requests redirects it to the related docker container. The interesting part here is that even the Reverse Proxy itself doesn’t know actual locations of the services. They could be configured to be anywhere with technologies like Docker Swarm or Kubernetes.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>worker_processes 1;
+events { worker_connections 1024; }
+
+http {
+  sendfile off;
+  server {
+      listen 80 default_server;  
+      server_name  localhost;          
+      resolver 127.0.0.11 valid=30s;    
+                  
+      location / {
+        index index.html;
+        include /etc/nginx/mime.types;
+      }
+      location /customer {                
+        rewrite /customer/(.*) /$1 break;        
+        proxy_pass  http://msdemo-service-customer/$1;  
+      }  
+      location /order {                
+        rewrite /order/(.*) /$1 break;        
+        proxy_pass  http://msdemo-service-order/$1;  
+      }
+      location /product {                
+        rewrite /product/(.*) /$1 break;        
+        proxy_pass  http://msdemo-service-product/$1;  
+      }   
+       location /accounting {                
+        rewrite /accounting/(.*) /$1 break;        
+        proxy_pass  http://msdemo-service-accounting/$1;  
+      }     
+              
+  }  
+  
+}
+</code></pre></div></div>
+
+<p>Note that addresses such as <code class="highlighter-rouge">http://msdemo-service-customer/</code> exist within the docker networks, defined inside docker compose files. Below is the customer service compose file, check the network aliases;</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.7'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">web-service-customer</span><span class="pi">:</span>  
+    <span class="na">build</span><span class="pi">:</span>
+      <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+      <span class="na">target</span><span class="pi">:</span> <span class="s">web-service-customer</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">msdemo-web-service-customer:v1.0</span>  
+    <span class="na">volumes</span><span class="pi">:</span>          
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">bind</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">./</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">/customer</span>    
+    <span class="na">command</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">/customer/run.sh</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">6002:80</span>    
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">PYTHONUNBUFFERED</span><span class="pi">:</span> <span class="s">1</span>
+      <span class="na">INSTALL_PATH</span><span class="pi">:</span> <span class="s">/customer</span>
+      <span class="na">EVENT_BUS_IP</span><span class="pi">:</span> <span class="s">msdemo-event-bus</span>      
+      <span class="na">EVENT_BUS_USERNAME</span><span class="pi">:</span> <span class="s">msdemo_usr</span>
+      <span class="na">EVENT_BUS_PASSWORD</span><span class="pi">:</span> <span class="s">msdemo_pass</span>
+      <span class="na">DATABASE_IP</span><span class="pi">:</span> <span class="s">msdemo-db-customer</span>
+      <span class="na">DATABASE_PORT</span><span class="pi">:</span> <span class="s">6379</span>
+      <span class="na">DATABASE_PASSWORD</span><span class="pi">:</span> <span class="s">customer_pass</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">default</span><span class="pi">:</span> <span class="pi">{}</span>
+      <span class="na">msdemo-nw</span><span class="pi">:</span>
+        <span class="na">aliases</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">msdemo-service-customer</span>
+      <span class="na">msdemo-nw-order</span><span class="pi">:</span>
+        <span class="na">aliases</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">msdemo-service-customer</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">msdemo-nw</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">msdemo-nw</span>
+  <span class="na">msdemo-nw-order</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">msdemo-nw-customer</span>
+</code></pre></div></div>
+
+<h2 id="consumers">Consumers</h2>
+
+<p>The consumers are any number of clients who use the webservices for whatever logic. Three of them are implemented but more can be added.</p>
+
+<p><strong>ECommerce Website</strong>: Developed using Python + Flask. Containerized. Using this website, users can Register, Login, Logout, View Categories, View Products, Order Products, View and update their profile, view their order history and order status.</p>
+
+<p><strong>ECommerce Native Android App</strong>: Developed as a native Android apk using Java. The purpose is the same as ECommerce website but with few options missing (you can’t update user details or view categories)</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/android1.png" alt="android1" height="320px" width="170px">
+<img src="./Microservices, a prototype from scratch - Lain.run_files/android2.png" alt="android2" height="320px" width="170px"></p>
+
+<p>Figure 18. Android application screenshots</p>
+
+<p><strong>Management Website</strong>: Developed using Python + Flask. Containerized. Product admins can Login, Add/Update/Delete Categories and Products, Edit customer credits, View all Orders history and their status.</p>
+
+<h2 id="running-the-project">Running the Project</h2>
+
+<p>All modules are prepared for Docker Compose. The classic option is running compose from terminal. You need to repeat the following process for each module.</p>
+
+<ol>
+  <li>Open a terminal. Change directory to the module</li>
+  <li>Type <code class="highlighter-rouge">docker-compose up</code></li>
+</ol>
+
+<p>You need to run the database dockers first, event bus and event store next, web services, websites and the reverse proxy last. That’s it. Everything should install inside its own container and run in there. Aside from Docker itself, you don’t need to explicitly install anything else.</p>
+
+<p>Only couchDB requires the following command after it starts:</p>
+
+<p><code class="highlighter-rouge">curl -X PUT http://accounting_usr:accounting_pass@127.0.0.1:5984/_users</code></p>
+
+<p>Below is how all the modules running looks like.</p>
+
+<p><img src="./Microservices, a prototype from scratch - Lain.run_files/alldockersrunning.png" alt="alldockersrunning"></p>
+
+<p>Figure 19. All dockers running on terminal</p>
+
+<p>Both websites run on ports 5001 and 5002 both of which you can edit from their yml files. On Android project, you need to open the settings (upper right corner) inside the app and change the IP / Host of the reverse proxy server.</p>
+
+<h1 id="source-code">Source Code</h1>
+
+<p><a href="https://github.com/ragnaray/Microservices" height="175px" width="333px">https://github.com/ragnaray/Microservices</a></p>
+
+<p><code class="highlighter-rouge">git pull https://github.com/ragnaray/Microservices.git</code></p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>This article and the source code were a product of my self study journey. Microservices may seem to get things complicated but it is targeting relatively big and evolving projects. If you don’t need it, don’t use it. The limited business domain introduced here could be solved by a simple MVC application with a single database. On the other hand, giant companies such as Google, Microsoft and Amazon have all moved their environment into microservice architecture. To use the products of these companies, you don’t need to know the architecture itself but it is my personal belief that it is important to learn the basics of any technology you use.
+Along the way, I have studied over 20 different software architectural patterns, took notes and coded them too. Maybe I will write about them some other time. At the end of the day, it was great fun and satisfying. Apologies for any grammar or technical mistakes and thank you for reading!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><svg class="svg-inline--fa fa-tags fa-w-20 fa-fw" aria-hidden="true" data-prefix="fas" data-icon="tags" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg><!-- <i class="fas fa-fw fa-tags" aria-hidden="true"></i> --> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lain.run/tags/#android" class="page__taxonomy-item" rel="tag">Android</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#api-gateway" class="page__taxonomy-item" rel="tag">API Gateway</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#c-sharp" class="page__taxonomy-item" rel="tag">C Sharp</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#couchdb" class="page__taxonomy-item" rel="tag">CouchDB</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#cqrs" class="page__taxonomy-item" rel="tag">CQRS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#docker" class="page__taxonomy-item" rel="tag">Docker</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#domain-driven-design" class="page__taxonomy-item" rel="tag">Domain Driven Design</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#event-bus" class="page__taxonomy-item" rel="tag">Event Bus</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#event-driven-architecture" class="page__taxonomy-item" rel="tag">Event Driven Architecture</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#event-store" class="page__taxonomy-item" rel="tag">Event Store</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#flask" class="page__taxonomy-item" rel="tag">Flask</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#java" class="page__taxonomy-item" rel="tag">Java</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#node-js" class="page__taxonomy-item" rel="tag">Node.js</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#postgresql" class="page__taxonomy-item" rel="tag">PostgreSql</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#python" class="page__taxonomy-item" rel="tag">Python</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#rabbitmq" class="page__taxonomy-item" rel="tag">RabbitMQ</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#redis" class="page__taxonomy-item" rel="tag">Redis</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#software-architectural-patterns" class="page__taxonomy-item" rel="tag">Software Architectural Patterns</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#sqlite" class="page__taxonomy-item" rel="tag">SQLite</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lain.run/tags/#web-services" class="page__taxonomy-item" rel="tag">Web Services</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><svg class="svg-inline--fa fa-folder-open fa-w-18 fa-fw" aria-hidden="true" data-prefix="fas" data-icon="folder-open" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M572.694 292.093L500.27 416.248A63.997 63.997 0 0 1 444.989 448H45.025c-18.523 0-30.064-20.093-20.731-36.093l72.424-124.155A64 64 0 0 1 152 256h399.964c18.523 0 30.064 20.093 20.73 36.093zM152 224h328v-48c0-26.51-21.49-48-48-48H272l-64-64H48C21.49 64 0 85.49 0 112v278.046l69.077-118.418C86.214 242.25 117.989 224 152 224z"></path></svg><!-- <i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> --> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lain.run/categories/#projects" class="page__taxonomy-item" rel="tag">Projects</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><svg class="svg-inline--fa fa-calendar-alt fa-w-14 fa-fw" aria-hidden="true" data-prefix="fas" data-icon="calendar-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg><!-- <i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> --> Updated:</strong> <time datetime="2021-01-01T00:00:00+00:00">January 01, 2021</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Microservices%2C+a+prototype+from+scratch%20https%3A%2F%2Flain.run%2Fprojects%2FMicroservices%2F" class="btn btn--twitter" onclick="window.open(this.href, &#39;window&#39;, &#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" title="Share on Twitter"><svg class="svg-inline--fa fa-twitter fa-w-16 fa-fw" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><!-- <i class="fab fa-fw fa-twitter" aria-hidden="true"></i> --><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flain.run%2Fprojects%2FMicroservices%2F" class="btn btn--facebook" onclick="window.open(this.href, &#39;window&#39;, &#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" title="Share on Facebook"><svg class="svg-inline--fa fa-facebook fa-w-14 fa-fw" aria-hidden="true" data-prefix="fab" data-icon="facebook" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 56.7v398.5c0 13.7-11.1 24.7-24.7 24.7H309.1V306.5h58.2l8.7-67.6h-67v-43.2c0-19.6 5.4-32.9 33.5-32.9h35.8v-60.5c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9h-58.4v67.6h58.4V480H24.7C11.1 480 0 468.9 0 455.3V56.7C0 43.1 11.1 32 24.7 32h398.5c13.7 0 24.8 11.1 24.8 24.7z"></path></svg><!-- <i class="fab fa-fw fa-facebook" aria-hidden="true"></i> --><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flain.run%2Fprojects%2FMicroservices%2F" class="btn btn--google-plus" onclick="window.open(this.href, &#39;window&#39;, &#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" title="Share on Google Plus"><svg class="svg-inline--fa fa-google-plus fa-w-16 fa-fw" aria-hidden="true" data-prefix="fab" data-icon="google-plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm-70.7 372c-68.8 0-124-55.5-124-124s55.2-124 124-124c31.3 0 60.1 11 83 32.3l-33.6 32.6c-13.2-12.9-31.3-19.1-49.4-19.1-42.9 0-77.2 35.5-77.2 78.1s34.2 78.1 77.2 78.1c32.6 0 64.9-19.1 70.1-53.3h-70.1v-42.6h116.9c1.3 6.8 1.9 13.6 1.9 20.7 0 70.8-47.5 121.2-118.8 121.2zm230.2-106.2v35.5H372v-35.5h-35.5v-35.5H372v-35.5h35.5v35.5h35.2v35.5h-35.2z"></path></svg><!-- <i class="fab fa-fw fa-google-plus" aria-hidden="true"></i> --><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Flain.run%2Fprojects%2FMicroservices%2F" class="btn btn--linkedin" onclick="window.open(this.href, &#39;window&#39;, &#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" title="Share on LinkedIn"><svg class="svg-inline--fa fa-linkedin fa-w-14 fa-fw" aria-hidden="true" data-prefix="fab" data-icon="linkedin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg><!-- <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> --><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="https://lain.run/feed.xml"><svg class="svg-inline--fa fa-rss-square fa-w-14 fa-fw" aria-hidden="true" data-prefix="fas" data-icon="rss-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M400 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM112 416c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm157.533 0h-34.335c-6.011 0-11.051-4.636-11.442-10.634-5.214-80.05-69.243-143.92-149.123-149.123-5.997-.39-10.633-5.431-10.633-11.441v-34.335c0-6.535 5.468-11.777 11.994-11.425 110.546 5.974 198.997 94.536 204.964 204.964.352 6.526-4.89 11.994-11.425 11.994zm103.027 0h-34.334c-6.161 0-11.175-4.882-11.427-11.038-5.598-136.535-115.204-246.161-251.76-251.76C68.882 152.949 64 147.935 64 141.774V107.44c0-6.454 5.338-11.664 11.787-11.432 167.83 6.025 302.21 141.191 308.205 308.205.232 6.449-4.978 11.787-11.432 11.787z"></path></svg><!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> --> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">©  Ayhan AVCI. Powered by <a href="https://jekyllrb.com/" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="./Microservices, a prototype from scratch - Lain.run_files/main.min.js.download"></script>
+  <script defer="" src="./Microservices, a prototype from scratch - Lain.run_files/all.js.download" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+  
+
+</body></html>

@@ -1,11 +1,11 @@
 version: '3.7'
 services:
-  db-customer:
+  db-patient:
     restart: always
     build: 
       context: .
-      target: db-customer
-    image: msdemo-db-customer:v1.0
+      target: db-patient
+    image: msdemo-db-patient:v1.0
     command: redis-server --requirepass ${REDIS_PASSWORD}
     ports:
       - "${DB_PORT}:6379"
@@ -15,11 +15,11 @@ services:
         target: /data   
     networks:
       default: {}      
-      msdemo_nw_customer:
+      msdemo_nw_patient:
         aliases:
-          - msdemo-db-customer  
+          - msdemo-db-patient  
 networks:  
-  msdemo_nw_customer:
+  msdemo_nw_patient:
     external:
-      name: msdemo-nw-customer
+      name: msdemo-nw-patient
 

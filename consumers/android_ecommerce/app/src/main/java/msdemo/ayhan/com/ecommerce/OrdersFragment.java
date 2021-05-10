@@ -71,7 +71,7 @@ public class OrdersFragment extends Fragment {
             }
 
             JsonObject post_json = new JsonObject();
-            post_json.addProperty("Type", "Customer");
+            post_json.addProperty("Type", "Patient");
             post_json.addProperty("Id", user_name);
 
             String [] params = {"order/get-orders/", "POST", post_json.toString()};

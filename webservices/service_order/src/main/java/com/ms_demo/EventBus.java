@@ -75,9 +75,9 @@ public class EventBus {
     map_topics.put("order.stock.confirmed", "msdemo.topic.order.stock.confirmed"); //Upon order.placed.recorded, after checking stocks. +Returns price per unit.
     map_topics.put("order.stock.rejected", "msdemo.topic.order.stock.rejected"); //Upon order.placed.recorded, after checking stocks. +Returns price per unit.
     
-    //Fired by Customer aggregate
-    map_topics.put("order.credit.confirmed", "msdemo.topic.order.credit.confirmed"); //Upon order.placed.recorded, after checking customer credit.
-    map_topics.put("order.credit.rejected", "msdemo.topic.order.credit.rejected"); //Upon order.placed.recorded, after checking customer credit.
+    //Fired by Patient aggregate
+    map_topics.put("order.credit.confirmed", "msdemo.topic.order.credit.confirmed"); //Upon order.placed.recorded, after checking patient credit.
+    map_topics.put("order.credit.rejected", "msdemo.topic.order.credit.rejected"); //Upon order.placed.recorded, after checking patient credit.
 
     database = db;         
   }
@@ -163,13 +163,13 @@ public class EventBus {
 
     if (str_action.equals("Place Order") && str_result.equals("Success")) {      
       System.out.println("Processing Place Order event with Success result");
-      String str_productid = "", str_orderid = "", str_customerid = "", str_timestamp = "", str_price = "", str_product_name = "";
+      String str_productid = "", str_orderid = "", str_patientid = "", str_timestamp = "", str_price = "", str_product_name = "";
       if (data_json.get("OrderID") != null)
         str_orderid = data_json.get("OrderID").getAsString(); 
       if (data_json.get("ProductId") != null)
         str_productid = data_json.get("ProductId").getAsString(); 
-      if (data_json.get("CustomerId") != null)
-        str_customerid = data_json.get("CustomerId").getAsString(); 
+      if (data_json.get("PatientId") != null)
+        str_patientid = data_json.get("PatientId").getAsString(); 
       if (data_json.get("TimeStamp") != null)
         str_timestamp = data_json.get("TimeStamp").getAsString(); 
       if (data_json.get("Price") != null)
@@ -177,11 +177,11 @@ public class EventBus {
       if (data_json.get("ProductName") != null)
         str_product_name = data_json.get("ProductName").getAsString(); 
       
-      if (str_productid.isEmpty() || str_orderid.isEmpty() || str_customerid.isEmpty() || str_timestamp.isEmpty() || str_price.isEmpty()) {
+      if (str_productid.isEmpty() || str_orderid.isEmpty() || str_patientid.isEmpty() || str_timestamp.isEmpty() || str_price.isEmpty()) {
         System.out.println("Empty Fields");
         return;
       }      
-      Boolean insert_result = database.InsertOrder(str_orderid, str_productid, str_customerid, str_price, str_timestamp, str_product_name);
+      Boolean insert_result = database.InsertOrder(str_orderid, str_productid, str_patientid, str_price, str_timestamp, str_product_name);
       if (insert_result == false) {
         System.out.println("Insert failed. Stopping opeartions");
         //Nothing updated yet. Send cancel order event to event store and stop here.
@@ -283,7 +283,7 @@ public class EventBus {
       JsonObject order_row = rows.get(0).getAsJsonObject();
 
       String product_id = order_row.get("PRODUCT").getAsString();
-      String customer_id = order_row.get("USERID").getAsString();
+      String patient_id = order_row.get("USERID").getAsString();
       String time_stamp = order_row.get("TIME").getAsString();
       Float price = order_row.get("PRICE").getAsFloat();
       Float credit = order_row.get("CREDIT").getAsFloat();
@@ -327,7 +327,7 @@ public class EventBus {
           event_bus_json.addProperty("Action", "Order Approved");         
           event_bus_json.addProperty("OrderId", order_id);
           event_bus_json.addProperty("ProductId", product_id);
-          event_bus_json.addProperty("CustomerId", customer_id);
+          event_bus_json.addProperty("PatientId", patient_id);
           event_bus_json.addProperty("Price", price);
           event_bus_json.addProperty("Amount", 1);
           event_bus_json.addProperty("Time", time_stamp);
@@ -339,14 +339,14 @@ public class EventBus {
           if (!stock_approved) 
             reason = "[Out of Stock] ";          
           if (!credit_approved)
-            reason += " [Insufficient Customer Credits]";        
+            reason += " [Insufficient Patient Credits]";        
           
           database.UpdateOrderStatus(order_id, DatabaseOperations.ORDER_STATUS_CANCELED);
           JsonObject event_bus_json = new JsonObject();
           event_bus_json.addProperty("Action", "Order Denied");         
           event_bus_json.addProperty("OrderId", order_id);
           event_bus_json.addProperty("ProductId", product_id);
-          event_bus_json.addProperty("CustomerId", customer_id);
+          event_bus_json.addProperty("PatientId", patient_id);
           event_bus_json.addProperty("Price", price);
           event_bus_json.addProperty("Amount", 1);
           event_bus_json.addProperty("Time", time_stamp);

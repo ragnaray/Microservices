@@ -2,7 +2,7 @@
 e-Commerce Website. Users may; 
 - Login, Logout
 - View, Edit, Delete Products and Categories 
-- View Customers, Edit Their Credits
+- View Patients, Edit Their Credits
 
 2018 Ayhan AVCI. 
 mailto: ayhanavci@gmail.com
@@ -92,20 +92,20 @@ def get_products_of_category_request(category_id):
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code   
 
-def get_customers_request():    
-  response = requests.get("{}/customer/get-all-users/".format(proxy_address))  
+def get_patients_request():    
+  response = requests.get("{}/patient/get-all-users/".format(proxy_address))  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
 def get_user_info(user_name):    
-  response = requests.get("{}/customer/get-user/{}".format(proxy_address, user_name))  
+  response = requests.get("{}/patient/get-user/{}".format(proxy_address, user_name))  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
 def edit_user_credit_request(user_name, credit):
-  response = requests.post("{}/customer/set-credit/".format(proxy_address), json={"UserName":user_name, "Credit":credit} )  
+  response = requests.post("{}/patient/set-credit/".format(proxy_address), json={"UserName":user_name, "Credit":credit} )  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
@@ -270,20 +270,20 @@ def delete_product():
       return render_template('deleteproduct.html', product_id=request.args.get('id'), product_name=product_name)
   return home()
 
-@app.route("/customers", methods=['GET']) 
-def customers():    
+@app.route("/patients", methods=['GET']) 
+def patients():    
   if (check_login() == False):
     return home()
-  result, code = get_customers_request()
-  customer_list = {}
+  result, code = get_patients_request()
+  patient_list = {}
   if (code == 200):
     if (str(result['result']['Status']) == "Success"):  
-      customer_list = result['result']['Users']  
-  print(customer_list)    
-  return render_template('customers.html', customers=customer_list)  
+      patient_list = result['result']['Users']  
+  print(patient_list)    
+  return render_template('patients.html', patients=patient_list)  
 
-@app.route("/edit-customer-credit", methods=['GET', 'POST']) 
-def edit_customer_credit():    
+@app.route("/edit-patient-credit", methods=['GET', 'POST']) 
+def edit_patient_credit():    
   if (check_login() == False):
     return home()
   if request.method == 'POST':
@@ -299,7 +299,7 @@ def edit_customer_credit():
           user_info['UserName'] = result['result']['User Info']['UserName']
           user_info['FullName'] = result['result']['User Info']['FullName']
           user_info['Credit'] = result['result']['User Info']['Credit']
-          return render_template('editcustomercredit.html', customer=user_info)
+          return render_template('editpatientcredit.html', patient=user_info)
   return home()
 
 def check_login():

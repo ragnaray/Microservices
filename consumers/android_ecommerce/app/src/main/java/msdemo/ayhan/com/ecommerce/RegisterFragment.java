@@ -82,7 +82,7 @@ public class RegisterFragment extends Fragment {
             post_json.addProperty("Email", email);
             post_json.addProperty("Credit", 100);
 
-            String [] params = {"customer/add-user/", "POST", post_json.toString()};
+            String [] params = {"patient/add-user/", "POST", post_json.toString()};
 
 
             new RestClientTask() {

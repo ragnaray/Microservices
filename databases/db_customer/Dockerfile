@@ -1,1 +1,0 @@
-FROM redis:alpine as db-customer

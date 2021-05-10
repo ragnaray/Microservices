@@ -88,7 +88,7 @@ public class DatabaseOperations {
       System.out.println("Table created successfully");
       return true;
    }
-   public Boolean InsertOrder(String str_orderid, String str_productid, String str_customerid, String str_price, String str_timestamp, String str_product_name) {
+   public Boolean InsertOrder(String str_orderid, String str_productid, String str_patientid, String str_price, String str_timestamp, String str_product_name) {
     Float price;
     try {
       price = Float.parseFloat(str_price);
@@ -112,7 +112,7 @@ public class DatabaseOperations {
        String sql = "INSERT INTO ORDERS(GUID, USERID, PRODUCT, PRICE, ORDERSTATUS, STOCKSTATUS, CREDITSTATUS, TIME, CREDIT, STOCK, PRODUCTNAME) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
        stmt = connection.prepareStatement(sql);
        stmt.setString(1, str_orderid);
-       stmt.setString(2, str_customerid);
+       stmt.setString(2, str_patientid);
        stmt.setString(3, str_productid);        
        stmt.setFloat(4, price);
        stmt.setInt(5, ORDER_STATUS_PENDING);
@@ -229,7 +229,7 @@ public class DatabaseOperations {
       String sql = "";
       if (type.equals("All"))
         sql = "SELECT * FROM ORDERS ORDER BY TIME";      
-      else if (type.equals("Customer"))
+      else if (type.equals("Patient"))
         sql = "SELECT * FROM ORDERS WHERE USERID=? ORDER BY TIME";              
       else if (type.equals("Single"))
         sql = "SELECT * FROM ORDERS WHERE GUID=? ORDER BY TIME";              
@@ -239,7 +239,7 @@ public class DatabaseOperations {
         return return_json;
       }       
       stmt = connection.prepareStatement(sql);      
-      if (type.equals("Customer") || type.equals("Single")) 
+      if (type.equals("Patient") || type.equals("Single")) 
         stmt.setString(1, id);
       
       ResultSet query_results = stmt.executeQuery();

@@ -39,26 +39,26 @@ def get_products_of_category_request(category_id):
   return "service call fail", response.status_code   
   
 def login_request(user_name, password):
-  response = requests.post("{}/customer/login-user/".format(proxy_address), json={"UserName":user_name, "Password": password} )  
+  response = requests.post("{}/patient/login-user/".format(proxy_address), json={"UserName":user_name, "Password": password} )  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
 def get_user_info(user_name):    
-  response = requests.get("{}/customer/get-user/{}".format(proxy_address, user_name))  
+  response = requests.get("{}/patient/get-user/{}".format(proxy_address, user_name))  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
 def get_orders():    
-  response = requests.post("{}/order/get-orders/".format(proxy_address), json={"Type":"Customer", "Id":session['username']})  
+  response = requests.post("{}/order/get-orders/".format(proxy_address), json={"Type":"Patient", "Id":session['username']})  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
 def order_product_request(id, name):    
   response = requests.post("{}/order/place-order/".format(proxy_address), 
-          json={"ProductId":id, "ProductName":name, "CustomerId":session['username'], "TimeStamp":time.strftime("%Y-%d-%m %H:%M:%S", time.localtime())})  
+          json={"ProductId":id, "ProductName":name, "PatientId":session['username'], "TimeStamp":time.strftime("%Y-%d-%m %H:%M:%S", time.localtime())})  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
@@ -71,7 +71,7 @@ def register_user(user_name, password, fullname, email):
     "Email": email, 
     "Credit": "100" 
   }
-  response = requests.post("{}/customer/add-user/".format(proxy_address), json=new_user)  
+  response = requests.post("{}/patient/add-user/".format(proxy_address), json=new_user)  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
@@ -84,7 +84,7 @@ def update_user(user_name, password, fullname, email):
     "Email": email, 
     "Credit": "100" 
   }
-  response = requests.post("{}/customer/update-user/".format(proxy_address), json=updated_user)  
+  response = requests.post("{}/patient/update-user/".format(proxy_address), json=updated_user)  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
@@ -114,7 +114,7 @@ def logout():
   return home()
 
 @app.route("/register", methods=['GET', 'POST']) 
-def register_customer():    
+def register_patient():    
   if request.method == 'POST':
     result, code = register_user(request.form['username'], request.form['password'], request.form['fullname'], request.form['emailaddress'])
     app.logger.info('register_user: %s, code: %d ', result, code)
@@ -138,7 +138,7 @@ def orders():
   return render_template('orders.html', orders=order_list)
 
 @app.route("/update-user", methods=['GET', 'POST']) 
-def update_customer():    
+def update_patient():    
   if request.method == 'POST':
     if session.get('logged_in') is not None:
       if session['logged_in'] == True:            

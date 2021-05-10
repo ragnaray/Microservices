@@ -1,5 +1,5 @@
 '''
-Customer Service. Provides Customer API as described on def index()
+Patient Service. Provides Patient API as described on def index()
 
 2018 Ayhan AVCI. 
 mailto: ayhanavci@gmail.com
@@ -84,13 +84,13 @@ def add_user():
     result = { "Status": "User already exists"} 
   else:    
     store_data = {}
-    store_data['Action'] = "Add New Customer"    
+    store_data['Action'] = "Add New Patient"    
     store_data['UserName'] = request.json['UserName']  
     store_data['FullName'] = request.json['FullName']  
     store_data['Password'] = request.json['Password']  
     store_data['Email'] = request.json['Email']      
     store_data['Credit'] = request.json['Credit']      
-    send_event_store_data("add_customer", store_data)
+    send_event_store_data("add_patient", store_data)
     result = { "Status": "Success"} 
   return jsonify(result=result), 200     
 
@@ -102,13 +102,13 @@ def update_user():
   else:    
     user_data = json.loads(redis_db.get(user_name))
     store_data = {}
-    store_data['Action'] = "Update Customer"    
+    store_data['Action'] = "Update Patient"    
     store_data['UserName'] = request.json['UserName']  
     store_data['FullName'] = request.json['FullName']
     store_data['Password'] = request.json['Password']  
     store_data['Email'] = request.json['Email']      
     store_data['Credit'] =  user_data['Credit'] #Preserve credit
-    send_event_store_data("update_customer", store_data)    
+    send_event_store_data("update_patient", store_data)    
     print("update_user:{0}".format(store_data['Action']))          
     result = { "Status": "Success"} 
   return jsonify(result=result), 200
@@ -163,13 +163,13 @@ def get_all_users():
     result = { "Status": "Success", "Users": user_data }     
   return jsonify(result=result), 200
 
-def event_add_new_customer(user_data):
+def event_add_new_patient(user_data):
   event_set_user_data(user_data)
-  print("event_add_new_customer - {0}".format(user_data))
+  print("event_add_new_patient - {0}".format(user_data))
 
-def event_update_customer(user_data):
+def event_update_patient(user_data):
   event_set_user_data(user_data)
-  print("event_update_customer - {0}".format(user_data))      
+  print("event_update_patient - {0}".format(user_data))      
 
 def event_set_credit(user_data):
   event_set_user_data(user_data)
@@ -179,7 +179,7 @@ def event_new_order_placed(message):
   print(message) 
   message_json = json.loads(message)
   data_json = json.loads(message_json['Data'])  
-  user_data = json.loads(redis_db.get(data_json['CustomerId']))
+  user_data = json.loads(redis_db.get(data_json['PatientId']))
   app.logger.info('event_new_order_placed: %s', user_data)        
   result = { "OrderID": data_json['OrderID'], "Credit":user_data['Credit'] }
   send_order_saga_data("CreditInfo", json.dumps(result))
@@ -188,13 +188,13 @@ def event_order_finalized(message):
   print("event_order_finalized:" + message) 
   message_json = json.loads(message)
   data_json = json.loads(message_json['Data']) 
-  user_data = json.loads(redis_db.get(data_json['CustomerId']))
-  print("event_order_finalized: Customer:" + data_json['CustomerId']) 
+  user_data = json.loads(redis_db.get(data_json['PatientId']))
+  print("event_order_finalized: Patient:" + data_json['PatientId']) 
   credit = user_data['Credit']
   price = data_json['Price']
   final_credit = 0 if float(credit) - float(price) < 0 else float(credit) - float(price)
   user_data['Credit'] = final_credit
-  redis_db.set(data_json['CustomerId'], json.dumps(user_data))
+  redis_db.set(data_json['PatientId'], json.dumps(user_data))
   redis_db.save()  
 
 def event_set_user_data(user_data):
@@ -220,9 +220,9 @@ send_queue_name = "msdemo_queue_event_store"
 send_exchange_name = "msdemo_exchange_event_store"
 send_routing_key = "msdemo_routingkey_event_store"
 
-receive_queue_name = "msdemo_queue_customer"
-receive_exchange_name = "msdemo_exchange_customer"
-receive_routing_key = "msdemo_routingkey_customer"
+receive_queue_name = "msdemo_queue_patient"
+receive_exchange_name = "msdemo_exchange_patient"
+receive_routing_key = "msdemo_routingkey_patient"
 
 exchange_name_order = "msdemo_exchange_order"
 
@@ -234,10 +234,10 @@ def listener_callback(ch, method, properties, body):
   response_json = json.loads(body)
   print("Listener Callback Key:{0} Json:{1}".format(method.routing_key, response_json))
   if (method.routing_key == receive_routing_key):
-    if (response_json['Data']['Action'] == "Add New Customer"):
-      event_add_new_customer(response_json['Data'])  
-    elif (response_json['Data']['Action'] == "Update Customer"):
-      event_update_customer(response_json['Data'])  
+    if (response_json['Data']['Action'] == "Add New Patient"):
+      event_add_new_patient(response_json['Data'])  
+    elif (response_json['Data']['Action'] == "Update Patient"):
+      event_update_patient(response_json['Data'])  
     elif (response_json['Data']['Action'] == "Set Credit"):
       event_set_credit(response_json['Data'])    
   elif (method.routing_key == saga_routing_key_order):
@@ -286,8 +286,8 @@ def start_sender():
 def send_event_store_data(event_type, data): 
   item = {}
   item_data = {}
-  item["Aggregate"] = "Customer"
-  item["Topic"] = "msdemo_topic.customer.{0}".format(event_type)
+  item["Aggregate"] = "Patient"
+  item["Topic"] = "msdemo_topic.patient.{0}".format(event_type)
   item["Timestamp"] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S:%f")  
   item["Version"] = "1.0"
   item["BUS_ExchangeName"] = receive_exchange_name

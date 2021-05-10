@@ -1,7 +1,7 @@
 #!/bin/sh
 
-cd customer
+cd patient
 echo "building"
 pip install -r requirements.txt
 echo "running"
-python customer.py
+python patient.py

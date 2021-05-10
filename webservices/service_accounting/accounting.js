@@ -78,14 +78,14 @@ amqp.connect(event_bus_string, function(err, conn) {
             var order_invoice = { 
               OrderID: fields_json['OrderID'], 
               ProductId: fields_json['ProductId'], 
-              CustomerId: fields_json['CustomerId'],
+              PatientId: fields_json['PatientId'],
               Price: fields_json['Price'], 
               TimeStamp: fields_json['TimeStamp']
             };
             
             accounting_db.insert(order_invoice, function(err, body){
               if(!err){
-                console.log("Invoice inserted for Order:%s. Sending Invoice to customer...", body);
+                console.log("Invoice inserted for Order:%s. Sending Invoice to patient...", body);
               }
               
             });

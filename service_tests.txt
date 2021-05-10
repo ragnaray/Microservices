@@ -1,23 +1,23 @@
-CUSTOMER
+PATIENT
 Login User
-curl -d '{"UserName":"test", "Password":"test"}' -H "Content-Type: application/json" -X POST http://localhost/customer/login-user/
+curl -d '{"UserName":"test", "Password":"test"}' -H "Content-Type: application/json" -X POST http://localhost/patient/login-user/
 
-Add Customer
-curl -d '{"UserName":"stannis", "FullName": "Stannis Baratheon", "Email": "stannis@lain.run", "Password":"pass1", "Credit": "100"}' -H "Content-Type: application/json" -X POST http://localhost/customer/add-user/
+Add Patient
+curl -d '{"UserName":"stannis", "FullName": "Stannis Baratheon", "Email": "stannis@lain.run", "Password":"pass1", "Credit": "100"}' -H "Content-Type: application/json" -X POST http://localhost/patient/add-user/
 
-Update Customer
-curl -d '{"UserName":"stannis", "FullName": "Stannis Baratheon", "Email": "stannis@lain.run", "Password":"1234", "Credit": "100"}' -H "Content-Type: application/json" -X POST http://localhost/customer/update-user/
-curl -d '{"UserName":"jon", "FullName": "Jon Snow", "Email": "jon@lain.run", "Password":"1234", "Credit": "100"}' -H "Content-Type: application/json" -X POST http://localhost/customer/update-user/
+Update Patient
+curl -d '{"UserName":"stannis", "FullName": "Stannis Baratheon", "Email": "stannis@lain.run", "Password":"1234", "Credit": "100"}' -H "Content-Type: application/json" -X POST http://localhost/patient/update-user/
+curl -d '{"UserName":"jon", "FullName": "Jon Snow", "Email": "jon@lain.run", "Password":"1234", "Credit": "100"}' -H "Content-Type: application/json" -X POST http://localhost/patient/update-user/
 
 Get Credit
-curl -d '{"UserName":"stannis"}' -H "Content-Type: application/json" -X GET http://localhost/customer/get-credit/
-curl -d '{"UserName":"jon"}' -H "Content-Type: application/json" -X GET http://localhost/customer/get-credit/
+curl -d '{"UserName":"stannis"}' -H "Content-Type: application/json" -X GET http://localhost/patient/get-credit/
+curl -d '{"UserName":"jon"}' -H "Content-Type: application/json" -X GET http://localhost/patient/get-credit/
 
-Get Customer
-curl -H "Content-Type: application/json" -X GET http://localhost/customer/get-user/jon
+Get Patient
+curl -H "Content-Type: application/json" -X GET http://localhost/patient/get-user/jon
 
-Get All Customers
-curl -H "Content-Type: application/json" -X GET http://localhost/customer/get-all-users/
+Get All Patients
+curl -H "Content-Type: application/json" -X GET http://localhost/patient/get-all-users/
 
 PRODUCT
 Get Categories
@@ -50,11 +50,11 @@ curl -d '{"ProductId":"42a2946a-08ec-4dfc-9b19-8ac3e2ed9db4", "Name":"Very Huge 
 
 ORDER
 Place Order
-curl -d '{"ProductId":"asd", "CustomerId": "5555", "TimeStamp":"18022018 03:25:08"}' -H "Content-Type: application/json" -X POST http://localhost/order/place-order/
+curl -d '{"ProductId":"asd", "patientId": "5555", "TimeStamp":"18022018 03:25:08"}' -H "Content-Type: application/json" -X POST http://localhost/order/place-order/
 
 Get Orders
 curl -d '{"Type":"All", "Id":"0"}' -H "Content-Type: application/json" -X POST http://localhost/order/get-orders/
-curl -d '{"Type":"Customer", "Id":"555"}' -H "Content-Type: application/json" -X POST http://localhost/order/get-orders/
+curl -d '{"Type":"patient", "Id":"555"}' -H "Content-Type: application/json" -X POST http://localhost/order/get-orders/
 curl -d '{"Type":"Single", "Id":"123"}' -H "Content-Type: application/json" -X POST http://localhost/order/get-orders/
 
 ACCOUNTING

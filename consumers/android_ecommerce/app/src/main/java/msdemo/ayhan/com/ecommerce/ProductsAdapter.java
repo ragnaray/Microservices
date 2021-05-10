@@ -73,7 +73,7 @@ public class ProductsAdapter extends ArrayAdapter<ProductModel> {
     }
     private void PlaceOrder(ProductModel product_item) {
         try {
-            //json={"ProductId":id, "ProductName":name, "CustomerId":session['username'], "TimeStamp":time.strftime("%Y-%d-%m %H:%M:%S", time.localtime())})
+            //json={"ProductId":id, "ProductName":name, "PatientId":session['username'], "TimeStamp":time.strftime("%Y-%d-%m %H:%M:%S", time.localtime())})
             SharedPreferences sharedPref = ((Activity)mContext).getPreferences(Context.MODE_PRIVATE);
             String user_name = sharedPref.getString(mContext.getString(R.string.saved_login_name), null);
             if (user_name == null) {
@@ -89,7 +89,7 @@ public class ProductsAdapter extends ArrayAdapter<ProductModel> {
             JsonObject post_json = new JsonObject();
             post_json.addProperty("ProductId", product_item.Code);
             post_json.addProperty("ProductName", product_item.Name);
-            post_json.addProperty("CustomerId", user_name);
+            post_json.addProperty("PatientId", user_name);
             post_json.addProperty("TimeStamp", formated_date);
 
 

@@ -82,7 +82,7 @@ public class LoginFragment extends Fragment {
             post_json.addProperty("UserName", user_name);
             post_json.addProperty("Password", password);
 
-            String [] params = {"customer/login-user/", "POST", post_json.toString()};
+            String [] params = {"patient/login-user/", "POST", post_json.toString()};
 
 
             new RestClientTask() {

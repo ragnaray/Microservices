@@ -5,10 +5,6 @@ Accounting Web Service.
 - For each finalized order, records an Invoice and sends it to user (just logs really)
 - Has /get-revenue method which 
 
-2018 Ayhan AVCI. 
-mailto: ayhanavci@gmail.com
-https://lain.run
-https://github.com/ayhanavci/
 
 */
 var express = require('express');

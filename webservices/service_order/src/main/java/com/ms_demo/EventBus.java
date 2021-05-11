@@ -2,10 +2,6 @@
 
 Communicates with the Event Bus. Sends and Receives Order & Order Saga events
 
-2018 Ayhan AVCI. 
-mailto: ayhanavci@gmail.com
-https://lain.run
-https://github.com/ayhanavci/
 
 */
 package com.ms_demo;

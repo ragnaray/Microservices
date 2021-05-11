@@ -2,10 +2,6 @@
 
 Web Services. Place order and Get Orders API.
 
-2018 Ayhan AVCI. 
-mailto: ayhanavci@gmail.com
-https://lain.run
-https://github.com/ayhanavci/
 
 */
 

@@ -1,4 +1,4 @@
-package msdemo.ayhan.com.ecommerce;
+package msdemo.rxmed.com.ecommerce;
 
 public class MedicationModel {
     int ID;

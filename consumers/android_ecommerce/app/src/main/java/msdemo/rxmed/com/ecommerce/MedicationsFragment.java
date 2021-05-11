@@ -1,4 +1,4 @@
-package msdemo.ayhan.com.ecommerce;
+package msdemo.rxmed.com.ecommerce;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;

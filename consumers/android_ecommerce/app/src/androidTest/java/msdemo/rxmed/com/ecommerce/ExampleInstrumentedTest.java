@@ -1,4 +1,4 @@
-package msdemo.ayhan.com.ecommerce;
+package msdemo.rxmed.com.ecommerce;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("msdemo.ayhan.com.ecommerce", appContext.getPackageName());
+        assertEquals("msdemo.rxmed.com.ecommerce", appContext.getPackageName());
     }
 }

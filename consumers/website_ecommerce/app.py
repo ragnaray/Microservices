@@ -4,10 +4,6 @@ e-Commerce Website. Users may;
 - View Medications and Categories 
 - Place Purchase Orders, View Status of Their Purchase Orders
 
-2018 Ayhan AVCI. 
-mailto: ayhanavci@gmail.com
-https://lain.run
-https://github.com/ayhanavci/
 '''
 
 from flask import Flask, request, flash, render_template, json, jsonify, session, abort

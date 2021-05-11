@@ -1,4 +1,4 @@
-package msdemo.ayhan.com.ecommerce;
+package msdemo.rxmed.com.ecommerce;
 
 import android.app.Activity;
 import android.content.Context;

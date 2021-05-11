@@ -3,10 +3,6 @@
 Event Store DB Operations. 
 - Inserts Event Sourcing events into Record DB as described in CQRS pattern.
 
-2018 Ayhan AVCI. 
-mailto: ayhanavci@gmail.com
-https://lain.run
-https://github.com/ayhanavci/
 
 */
 

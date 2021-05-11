@@ -4,10 +4,6 @@ Event Store.
 - Inserts Event Sourcing events into Record DB as described in CQRS pattern.
 - Broadcasts record events
 
-2018 Ayhan AVCI. 
-mailto: ayhanavci@gmail.com
-https://lain.run
-https://github.com/ayhanavci/
 
 */
 

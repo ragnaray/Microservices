@@ -4,10 +4,6 @@ e-Commerce Website. Users may;
 - View, Edit, Delete Medications and Categories 
 - View Patients, Edit Their Credits
 
-2018 Ayhan AVCI. 
-mailto: ayhanavci@gmail.com
-https://lain.run
-https://github.com/ayhanavci/
 '''
 
 from flask import Flask, request, flash, render_template, json, jsonify, session, abort

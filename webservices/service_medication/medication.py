@@ -1,10 +1,6 @@
 '''
 Medication Service. Provides Category & Medication API as described on def index()
 
-2018 Ayhan AVCI. 
-mailto: ayhanavci@gmail.com
-https://lain.run
-https://github.com/ayhanavci/
 
 '''
 from flask import Flask

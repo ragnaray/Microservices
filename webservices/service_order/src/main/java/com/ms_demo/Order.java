@@ -99,16 +99,16 @@ public class Order {
     {
       try {
         JsonObject data_json = new JsonParser().parse(order_json).getAsJsonObject();                   
-        String str_productid = "", str_patientid = "", str_timestamp = "";
+        String str_medicationid = "", str_patientid = "", str_timestamp = "";
         
-        if (data_json.get("ProductId") != null)
-          str_productid = data_json.get("ProductId").getAsString(); 
+        if (data_json.get("MedicationId") != null)
+          str_medicationid = data_json.get("MedicationId").getAsString(); 
         if (data_json.get("PatientId") != null)
           str_patientid = data_json.get("PatientId").getAsString(); 
         if (data_json.get("TimeStamp") != null)
           str_timestamp = data_json.get("TimeStamp").getAsString();         
 
-        if (str_productid.isEmpty() || str_patientid.isEmpty() || str_timestamp.isEmpty()) {
+        if (str_medicationid.isEmpty() || str_patientid.isEmpty() || str_timestamp.isEmpty()) {
           System.out.println("VerifyPlaceOrderFields Empty Fields");
           return false;
         }

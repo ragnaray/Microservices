@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Delete Medication{% endblock %}</h2>
+{% endblock %}
+  
+{% block content %}
+{% if session['logged_in'] %}
+<div class="w3-container">    
+  <div class="w3-card-4">
+    <div class="w3-container w3-green">
+      <h3>Confirm deletion</h3>
+    </div>
+    <form action="/delete-medication" method="POST" class="w3-container">
+      <p><label for="medicationid">Medication Id</label>
+        <input name="medicationid" id="medicationid" value="{{ medication_id }}" class="w3-input  w3-border" required readonly></p>        
+      <p><label for="medicationname">Medication Name</label>
+      <input name="medicationname" id="medicationname" value="{{ medication_name }}" class="w3-input  w3-border" required readonly></p>        
+      <p><button type="submit" class="w3-button w3-green" value="Submit">Delete</button></p>
+    </form>
+  </div>
+  <p><a href="/medications" class="w3-bar-item">Back to medications</a></p>
+</div>
+{% else %}
+<p>Login first!</p>
+{% endif %}
+{% endblock %}

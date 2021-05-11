@@ -1,6 +1,6 @@
 package msdemo.ayhan.com.ecommerce;
 
-public class ProductModel {
+public class MedicationModel {
     int ID;
     String Code;
     String Name;
@@ -11,7 +11,7 @@ public class ProductModel {
     int Stock;
     String CategoryName;
 
-    public ProductModel(int ID, String Code, String Name, String Description, String Supplier, String CategoryId, Float Price, int Stock, String CategoryName) {
+    public MedicationModel(int ID, String Code, String Name, String Description, String Supplier, String CategoryId, Float Price, int Stock, String CategoryName) {
         this.ID = ID;
         this.Code = Code;
         this.Name = Name;

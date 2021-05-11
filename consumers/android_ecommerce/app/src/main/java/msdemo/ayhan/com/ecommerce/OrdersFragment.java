@@ -86,16 +86,16 @@ public class OrdersFragment extends Fragment {
                             String data_string = response_json.get("Data").toString();
                             JsonObject data_json = new JsonParser().parse(data_string).getAsJsonObject();
                             String status_string = data_json.get("result").toString().replaceAll("\"", "");
-                            //{"GUID":"7a837981-4a1b-4a21-b226-8e2947d08e60","USERID":"jon","PRODUCT":"fcc6fe7b-1784-4f47-8efa-137b19a876ed",
-                            // "PRODUCTNAME":"Hot Laptop","PRICE":19.0,"ORDERSTATUS":1,"STOCKSTATUS":3,"CREDITSTATUS":2,"TIME":"2018-24-12 01:36:53","CREDIT":5.0,"STOCK":43}
+                            //{"GUID":"7a837981-4a1b-4a21-b226-8e2947d08e60","USERID":"jon","MEDICATION":"fcc6fe7b-1784-4f47-8efa-137b19a876ed",
+                            // "MEDICATIONNAME":"Hot Laptop","PRICE":19.0,"ORDERSTATUS":1,"STOCKSTATUS":3,"CREDITSTATUS":2,"TIME":"2018-24-12 01:36:53","CREDIT":5.0,"STOCK":43}
                             if (status_string.equals("Success")) {
                                 JsonArray orders_json = data_json.get("Data").getAsJsonArray();
                                 for (int i = 0; i < orders_json.size(); ++i) {
                                     JsonObject next_order = orders_json.get(i).getAsJsonObject();
                                     String Guid = next_order.get("GUID").getAsString();
                                     String UserId = next_order.get("USERID").getAsString();
-                                    String ProductId = next_order.get("PRODUCT").getAsString();
-                                    String ProductName = next_order.get("PRODUCTNAME").getAsString();
+                                    String MedicationId = next_order.get("MEDICATION").getAsString();
+                                    String MedicationName = next_order.get("MEDICATIONNAME").getAsString();
                                     Float Price = next_order.get("PRICE").getAsFloat();
                                     int OrderStatus = next_order.get("ORDERSTATUS").getAsInt();
                                     int StockStatus = next_order.get("STOCKSTATUS").getAsInt();
@@ -106,8 +106,8 @@ public class OrdersFragment extends Fragment {
                                     orders.add(new OrderModel(
                                             Guid,
                                             UserId,
-                                            ProductId,
-                                            ProductName,
+                                            MedicationId,
+                                            MedicationName,
                                             Price,
                                             OrderStatus,
                                             StockStatus,

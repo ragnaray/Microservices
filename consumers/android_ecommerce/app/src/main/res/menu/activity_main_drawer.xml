@@ -21,12 +21,12 @@
 
         </menu>
     </item>
-    <item android:title="Shopping"  android:id="@+id/menu_products">
+    <item android:title="Shopping"  android:id="@+id/menu_medications">
         <menu>
             <item
-                android:id="@+id/nav_products"
-                android:icon="@drawable/ic_products"
-                android:title="View Products" />
+                android:id="@+id/nav_medications"
+                android:icon="@drawable/ic_medications"
+                android:title="View Medications" />
             <item
                 android:id="@+id/nav_orders"
                 android:icon="@drawable/ic_orders"

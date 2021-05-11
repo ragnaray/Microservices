@@ -73,11 +73,11 @@ amqp.connect(event_bus_string, function(err, conn) {
           if (message_json['Event'].toString() == "OrderFinalized") {
             data_json = JSON.parse(message_json['Data']);               
             fields_json = JSON.parse(data_json['Data']);
-            console.log("ProductId is: %s", fields_json['ProductId']);
+            console.log("MedicationId is: %s", fields_json['MedicationId']);
             
             var order_invoice = { 
               OrderID: fields_json['OrderID'], 
-              ProductId: fields_json['ProductId'], 
+              MedicationId: fields_json['MedicationId'], 
               PatientId: fields_json['PatientId'],
               Price: fields_json['Price'], 
               TimeStamp: fields_json['TimeStamp']

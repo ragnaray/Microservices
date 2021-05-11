@@ -71,7 +71,7 @@ public class EventBus {
     map_topics.put("order.approved.recorded", "msdemo.topic.order.approved.recorded"); //Upon order.approved
     map_topics.put("order.rejected.recorded", "msdemo.topic.order.rejected.recorded"); //Upon order.rejected
 
-    //Fired by Products aggregate
+    //Fired by Medications aggregate
     map_topics.put("order.stock.confirmed", "msdemo.topic.order.stock.confirmed"); //Upon order.placed.recorded, after checking stocks. +Returns price per unit.
     map_topics.put("order.stock.rejected", "msdemo.topic.order.stock.rejected"); //Upon order.placed.recorded, after checking stocks. +Returns price per unit.
     
@@ -163,25 +163,25 @@ public class EventBus {
 
     if (str_action.equals("Place Order") && str_result.equals("Success")) {      
       System.out.println("Processing Place Order event with Success result");
-      String str_productid = "", str_orderid = "", str_patientid = "", str_timestamp = "", str_price = "", str_product_name = "";
+      String str_medicationid = "", str_orderid = "", str_patientid = "", str_timestamp = "", str_price = "", str_medication_name = "";
       if (data_json.get("OrderID") != null)
         str_orderid = data_json.get("OrderID").getAsString(); 
-      if (data_json.get("ProductId") != null)
-        str_productid = data_json.get("ProductId").getAsString(); 
+      if (data_json.get("MedicationId") != null)
+        str_medicationid = data_json.get("MedicationId").getAsString(); 
       if (data_json.get("PatientId") != null)
         str_patientid = data_json.get("PatientId").getAsString(); 
       if (data_json.get("TimeStamp") != null)
         str_timestamp = data_json.get("TimeStamp").getAsString(); 
       if (data_json.get("Price") != null)
         str_price = data_json.get("Price").getAsString(); 
-      if (data_json.get("ProductName") != null)
-        str_product_name = data_json.get("ProductName").getAsString(); 
+      if (data_json.get("MedicationName") != null)
+        str_medication_name = data_json.get("MedicationName").getAsString(); 
       
-      if (str_productid.isEmpty() || str_orderid.isEmpty() || str_patientid.isEmpty() || str_timestamp.isEmpty() || str_price.isEmpty()) {
+      if (str_medicationid.isEmpty() || str_orderid.isEmpty() || str_patientid.isEmpty() || str_timestamp.isEmpty() || str_price.isEmpty()) {
         System.out.println("Empty Fields");
         return;
       }      
-      Boolean insert_result = database.InsertOrder(str_orderid, str_productid, str_patientid, str_price, str_timestamp, str_product_name);
+      Boolean insert_result = database.InsertOrder(str_orderid, str_medicationid, str_patientid, str_price, str_timestamp, str_medication_name);
       if (insert_result == false) {
         System.out.println("Insert failed. Stopping opeartions");
         //Nothing updated yet. Send cancel order event to event store and stop here.
@@ -282,7 +282,7 @@ public class EventBus {
       JsonArray rows = order_json.get("Data").getAsJsonArray();
       JsonObject order_row = rows.get(0).getAsJsonObject();
 
-      String product_id = order_row.get("PRODUCT").getAsString();
+      String medication_id = order_row.get("MEDICATION").getAsString();
       String patient_id = order_row.get("USERID").getAsString();
       String time_stamp = order_row.get("TIME").getAsString();
       Float price = order_row.get("PRICE").getAsFloat();
@@ -326,7 +326,7 @@ public class EventBus {
           JsonObject event_bus_json = new JsonObject();
           event_bus_json.addProperty("Action", "Order Approved");         
           event_bus_json.addProperty("OrderId", order_id);
-          event_bus_json.addProperty("ProductId", product_id);
+          event_bus_json.addProperty("MedicationId", medication_id);
           event_bus_json.addProperty("PatientId", patient_id);
           event_bus_json.addProperty("Price", price);
           event_bus_json.addProperty("Amount", 1);
@@ -345,7 +345,7 @@ public class EventBus {
           JsonObject event_bus_json = new JsonObject();
           event_bus_json.addProperty("Action", "Order Denied");         
           event_bus_json.addProperty("OrderId", order_id);
-          event_bus_json.addProperty("ProductId", product_id);
+          event_bus_json.addProperty("MedicationId", medication_id);
           event_bus_json.addProperty("PatientId", patient_id);
           event_bus_json.addProperty("Price", price);
           event_bus_json.addProperty("Amount", 1);

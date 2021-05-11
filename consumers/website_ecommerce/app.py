@@ -1,7 +1,7 @@
 '''
 e-Commerce Website. Users may; 
 - Login, Logout, Register, View & Edit User Information 
-- View Products and Categories 
+- View Medications and Categories 
 - Place Purchase Orders, View Status of Their Purchase Orders
 
 2018 Ayhan AVCI. 
@@ -21,19 +21,19 @@ app = Flask(__name__ )
 proxy_address = os.environ["SERVICE_REGISTRY"] 
 
 def get_categories_request():  
-  response = requests.get("{}/product/get-categories/".format(proxy_address))  
+  response = requests.get("{}/medication/get-categories/".format(proxy_address))  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
-def get_all_products_request():      
-  response = requests.get("{}/product/get-all-products/".format(proxy_address))    
+def get_all_medications_request():      
+  response = requests.get("{}/medication/get-all-medications/".format(proxy_address))    
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
-def get_products_of_category_request(category_id):
-  response = requests.get("{}/product/get-products/".format(proxy_address), json={"CategoryId":category_id} )  
+def get_medications_of_category_request(category_id):
+  response = requests.get("{}/medication/get-medications/".format(proxy_address), json={"CategoryId":category_id} )  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code   
@@ -56,9 +56,9 @@ def get_orders():
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
-def order_product_request(id, name):    
+def order_medication_request(id, name):    
   response = requests.post("{}/order/place-order/".format(proxy_address), 
-          json={"ProductId":id, "ProductName":name, "PatientId":session['username'], "TimeStamp":time.strftime("%Y-%d-%m %H:%M:%S", time.localtime())})  
+          json={"MedicationId":id, "MedicationName":name, "PatientId":session['username'], "TimeStamp":time.strftime("%Y-%d-%m %H:%M:%S", time.localtime())})  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
@@ -164,37 +164,37 @@ def update_patient():
       flash("Update user not logged in") 
     return home()    
 
-@app.route("/products", methods=['GET']) 
-def products():    
+@app.route("/medications", methods=['GET']) 
+def medications():    
   if (check_login() == False):
     flash("User not logged in") 
     return home()
-  result, code = get_all_products_request()    
-  product_list = {}
-  print(product_list)
+  result, code = get_all_medications_request()    
+  medication_list = {}
+  print(medication_list)
   if (code == 200):
     if (str(result['result']['Status']) == "Success"):  
-      product_list = result['result']['Products']      
-  return render_template('products.html', products=product_list)
+      medication_list = result['result']['Medications']      
+  return render_template('medications.html', medications=medication_list)
 
-@app.route("/view-products/<id>", methods=['GET']) 
-def view_products(id):      
+@app.route("/view-medications/<id>", methods=['GET']) 
+def view_medications(id):      
   if (check_login() == False):
     flash("User not logged in") 
     return home()
-  result, code = get_products_of_category_request(id)    
-  product_list = {}
+  result, code = get_medications_of_category_request(id)    
+  medication_list = {}
   if (code == 200):
     if (str(result['result']['Status']) == "Success"):  
-      product_list = result['result']['Products']      
-  return render_template('products.html', products=product_list)
+      medication_list = result['result']['Medications']      
+  return render_template('medications.html', medications=medication_list)
 
-@app.route('/order-product/<id>/<name>', methods=['GET']) 
-def order_product(id, name):  
+@app.route('/order-medication/<id>/<name>', methods=['GET']) 
+def order_medication(id, name):  
   if (check_login() == False):
     flash("User not logged in") 
     return home()
-  result, code = order_product_request(id, name)  
+  result, code = order_medication_request(id, name)  
   print(result)
   category_list = {}
   if (code == 200):

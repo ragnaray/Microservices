@@ -19,38 +19,38 @@ curl -H "Content-Type: application/json" -X GET http://localhost/patient/get-use
 Get All Patients
 curl -H "Content-Type: application/json" -X GET http://localhost/patient/get-all-users/
 
-PRODUCT
+MEDICATION
 Get Categories
-curl -H "Content-Type: application/json" -X GET http://localhost/product/get-categories/
+curl -H "Content-Type: application/json" -X GET http://localhost/medication/get-categories/
 
 Get Category
-curl -d '{"CategoryId":"26eaff5e-910e-4b3c-b6ef-7281744402c9"}' -H "Content-Type: application/json" -X GET http://localhost/product/get-category-details/
+curl -d '{"CategoryId":"26eaff5e-910e-4b3c-b6ef-7281744402c9"}' -H "Content-Type: application/json" -X GET http://localhost/medication/get-category-details/
 
 Add Category
-curl -d '{"Name":"Electronics"}' -H "Content-Type: application/json" -X POST http://localhost/product/add-new-category/
+curl -d '{"Name":"Electronics"}' -H "Content-Type: application/json" -X POST http://localhost/medication/add-new-category/
 
 Delete Category
-curl -d '{"CategoryId":"09b19b67-2e0b-4292-93de-ea1eed9f8586"}' -H "Content-Type: application/json" -X POST http://localhost/product/delete-category/
+curl -d '{"CategoryId":"09b19b67-2e0b-4292-93de-ea1eed9f8586"}' -H "Content-Type: application/json" -X POST http://localhost/medication/delete-category/
 
 Update Category
-curl -d '{"CategoryId":"241dc4a4-e22e-49a7-bb2e-6a82520902ee", "Name":"Electronics 2"}' -H "Content-Type: application/json" -X POST http://localhost/product/update-category/
+curl -d '{"CategoryId":"241dc4a4-e22e-49a7-bb2e-6a82520902ee", "Name":"Electronics 2"}' -H "Content-Type: application/json" -X POST http://localhost/medication/update-category/
 
-Get products
-curl -d '{"CategoryId":"241dc4a4-e22e-49a7-bb2e-6a82520902ee"}' -H "Content-Type: application/json" -X GET http://localhost/product/get-products/
-curl  -H "Content-Type: application/json" -X GET http://localhost/product/get-all-products/
+Get medications
+curl -d '{"CategoryId":"241dc4a4-e22e-49a7-bb2e-6a82520902ee"}' -H "Content-Type: application/json" -X GET http://localhost/medication/get-medications/
+curl  -H "Content-Type: application/json" -X GET http://localhost/medication/get-all-medications/
 
-Add product
-curl -d '{"Name":"Huge TV 2", "Description":"It is huge", "Supplier":"LG Istanbul", "CategoryId":"241dc4a4-e22e-49a7-bb2e-6a82520902ee", "Price":"300", "UnitsInStock":"100"}' -H "Content-Type: application/json" -X POST http://localhost/product/add-new-product/
+Add medication
+curl -d '{"Name":"Huge TV 2", "Description":"It is huge", "Supplier":"LG Istanbul", "CategoryId":"241dc4a4-e22e-49a7-bb2e-6a82520902ee", "Price":"300", "UnitsInStock":"100"}' -H "Content-Type: application/json" -X POST http://localhost/medication/add-new-medication/
 
-Delete product
-curl -d '{"ProductId":"14cb7b0f-177e-4df4-b157-65b8947ebfdd"}' -H "Content-Type: application/json" -X POST http://localhost/product/delete-product/
+Delete medication
+curl -d '{"MedicationId":"14cb7b0f-177e-4df4-b157-65b8947ebfdd"}' -H "Content-Type: application/json" -X POST http://localhost/medication/delete-medication/
 
-Update product
-curl -d '{"ProductId":"42a2946a-08ec-4dfc-9b19-8ac3e2ed9db4", "Name":"Very Huge TV", "Description":"It is huge", "Supplier":"LG Istanbul", "CategoryId":"241dc4a4-e22e-49a7-bb2e-6a82520902ee", "Price":"300", "UnitsInStock":"100"}' -H "Content-Type: application/json" -X POST http://localhost/product/update-product/
+Update medication
+curl -d '{"MedicationId":"42a2946a-08ec-4dfc-9b19-8ac3e2ed9db4", "Name":"Very Huge TV", "Description":"It is huge", "Supplier":"LG Istanbul", "CategoryId":"241dc4a4-e22e-49a7-bb2e-6a82520902ee", "Price":"300", "UnitsInStock":"100"}' -H "Content-Type: application/json" -X POST http://localhost/medication/update-medication/
 
 ORDER
 Place Order
-curl -d '{"ProductId":"asd", "patientId": "5555", "TimeStamp":"18022018 03:25:08"}' -H "Content-Type: application/json" -X POST http://localhost/order/place-order/
+curl -d '{"MedicationId":"asd", "patientId": "5555", "TimeStamp":"18022018 03:25:08"}' -H "Content-Type: application/json" -X POST http://localhost/order/place-order/
 
 Get Orders
 curl -d '{"Type":"All", "Id":"0"}' -H "Content-Type: application/json" -X POST http://localhost/order/get-orders/

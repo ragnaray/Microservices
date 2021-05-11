@@ -64,13 +64,13 @@ public class OrdersAdapter extends ArrayAdapter<OrderModel> {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.listview_orders_row, parent, false);
-        TextView txt_product_name = rowView.findViewById(R.id.txt_product_name);
+        TextView txt_medication_name = rowView.findViewById(R.id.txt_medication_name);
         TextView txt_order_date = rowView.findViewById(R.id.txt_order_date);
         TextView txt_order_status = rowView.findViewById(R.id.txt_order_status);
         TextView txt_extra_data = rowView.findViewById(R.id.txt_extra_data);
 
         OrderModel item = dataSet.get(position);
-        txt_product_name.setText(item.getProductName());
+        txt_medication_name.setText(item.getMedicationName());
         txt_order_date.setText(item.getOrderTime());
 
         if (item.getOrderStatus() == ORDER_STATUS_PENDING) {

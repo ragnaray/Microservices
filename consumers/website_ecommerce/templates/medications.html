@@ -24,19 +24,19 @@
       </tr>
     </thead>
     <tbody>
-      {% for product in products %}
+      {% for medication in medications %}
       <tr>
-        <td class="align-middle">{{ product[0] }}</td>
-        <td class="align-middle">{{ product[1] }}</td>
-        <td class="align-middle">{{ product[2] }}</td> 
-        <td class="align-middle">{{ product[3] }}</td> 
-        <td class="align-middle">{{ product[4] }}</td>                            
-        <td class="align-middle">{{ product[5] }}</td>
-        <td class="align-middle">{{ product[6] }}</td>
-        <td class="align-middle">{{ product[7] }}</td> 
-        <td class="align-middle">{{ product[8] }}</td>                 
+        <td class="align-middle">{{ medication[0] }}</td>
+        <td class="align-middle">{{ medication[1] }}</td>
+        <td class="align-middle">{{ medication[2] }}</td> 
+        <td class="align-middle">{{ medication[3] }}</td> 
+        <td class="align-middle">{{ medication[4] }}</td>                            
+        <td class="align-middle">{{ medication[5] }}</td>
+        <td class="align-middle">{{ medication[6] }}</td>
+        <td class="align-middle">{{ medication[7] }}</td> 
+        <td class="align-middle">{{ medication[8] }}</td>                 
         <td class="align-middle">
-          <a href="{{ url_for('order_product',id = product[1], name= product[2]) }}">Order
+          <a href="{{ url_for('order_medication',id = medication[1], name= medication[2]) }}">Order
         </td>            
       </tr>    
       {% endfor %}

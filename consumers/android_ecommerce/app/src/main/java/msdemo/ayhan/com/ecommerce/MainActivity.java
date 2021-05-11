@@ -127,9 +127,9 @@ public class MainActivity extends AppCompatActivity
                 fragment = RegisterFragment.newInstance();
                 title = "Register";
                 break;
-            case R.id.nav_products:
-                fragment = ProductsFragment.newInstance();
-                title = "Products";
+            case R.id.nav_medications:
+                fragment = MedicationsFragment.newInstance();
+                title = "Medications";
                 break;
             case R.id.nav_orders:
                 fragment = OrdersFragment.newInstance();

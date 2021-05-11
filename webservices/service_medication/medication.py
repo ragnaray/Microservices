@@ -1,5 +1,5 @@
 '''
-Product Service. Provides Category & Product API as described on def index()
+Medication Service. Provides Category & Medication API as described on def index()
 
 2018 Ayhan AVCI. 
 mailto: ayhanavci@gmail.com
@@ -21,21 +21,21 @@ import datetime
 import threading
 
 app = Flask(__name__)
-postgres_address = "msdemo-db-product"
+postgres_address = "msdemo-db-medication"
 
 @app.route('/', methods=['GET'])
 def index():
   services = {  
-    "get-products": {
+    "get-medications": {
       "CategoryId": "string"
     },
-    "get-all-products": {
+    "get-all-medications": {
       
     },
-    "get-product-details": {
-      "ProductId": "string"
+    "get-medication-details": {
+      "MedicationId": "string"
     },
-    "add-new-product": {
+    "add-new-medication": {
       "Name": "string",
       "Description": "string",
       "Supplier": "string",
@@ -43,8 +43,8 @@ def index():
       "Price": "double",
       "UnitsInStock": "int"
     },
-    "update-product": {
-      "ProductId": "string",
+    "update-medication": {
+      "MedicationId": "string",
       "Name": "string",
       "Description": "string",
       "Supplier": "string",
@@ -52,8 +52,8 @@ def index():
       "Price": "double",
       "UnitsInStock": "int"
     },
-    "delete-product": {
-      "ProductId": "string"
+    "delete-medication": {
+      "MedicationId": "string"
     },    
     "get-categories": {
       
@@ -72,88 +72,88 @@ def index():
   
   return jsonify(services=services), 200
 
-@app.route('/get-products/', methods=['GET'])
-def get_products():              
+@app.route('/get-medications/', methods=['GET'])
+def get_medications():              
   db_connection = create_connection()
   cursor = db_connection.cursor()
   category_id = request.json['CategoryId']  
   print(category_id)
-  cursor.execute("SELECT Products.*, Categories.Name \
-      FROM Products INNER JOIN Categories on Products.CategoryId=Categories.CategoryId WHERE Categories.CategoryId==?", (category_id,)) 
+  cursor.execute("SELECT Medications.*, Categories.Name \
+      FROM Medications INNER JOIN Categories on Medications.CategoryId=Categories.CategoryId WHERE Categories.CategoryId==?", (category_id,)) 
   rows = cursor.fetchall()
   result = {}
   if len(rows) == 0:
     result['Status'] = 'Not Found'
   else:
     result['Status'] = 'Success'
-    result['Products'] = rows
+    result['Medications'] = rows
   return jsonify(result=result), 200
 
-@app.route('/get-all-products/', methods=['GET'])
-def get_all_products():              
+@app.route('/get-all-medications/', methods=['GET'])
+def get_all_medications():              
   db_connection = create_connection()
   cursor = db_connection.cursor()  
-  cursor.execute("SELECT Products.*, Categories.Name \
-      FROM Products INNER JOIN Categories on Products.CategoryId=Categories.CategoryId") 
+  cursor.execute("SELECT Medications.*, Categories.Name \
+      FROM Medications INNER JOIN Categories on Medications.CategoryId=Categories.CategoryId") 
   rows = cursor.fetchall()
   result = {}
   if len(rows) == 0:
     result['Status'] = 'Not Found'
   else:
     result['Status'] = 'Success'
-    result['Products'] = rows
+    result['Medications'] = rows
   return jsonify(result=result), 200
 
-@app.route('/get-product-details/', methods=['GET'])
-def get_product_details():            
+@app.route('/get-medication-details/', methods=['GET'])
+def get_medication_details():            
   db_connection = create_connection()
   cursor = db_connection.cursor()
-  product_id = request.json['ProductId']  
-  cursor.execute("SELECT Products.*, Categories.Name \
-      FROM Products INNER JOIN Categories on Products.CategoryId=Categories.CategoryId WHERE ProductId==?", (product_id,))   
-  product = cursor.fetchone()
+  medication_id = request.json['MedicationId']  
+  cursor.execute("SELECT Medications.*, Categories.Name \
+      FROM Medication INNER JOIN Categories on Medication.CategoryId=Categories.CategoryId WHERE MedicationId==?", (medication_id,))   
+  medication = cursor.fetchone()
   result = {}
-  if product is None:
+  if medication is None:
     result['Status'] = 'Not Found'
   else:
     result['Status'] = 'Success'    
-    result['Product'] = product
+    result['Medication'] = medication
   return jsonify(result=result), 200
 
-@app.route('/add-new-product/', methods=['POST'])
-def add_new_product():
+@app.route('/add-new-medication/', methods=['POST'])
+def add_new_medication():
   store_data = {}
-  store_data['Action'] = "Add New Product"
-  store_data['ProductId'] = str(uuid.uuid4())
+  store_data['Action'] = "Add New Medication"
+  store_data['MedicationId'] = str(uuid.uuid4())
   store_data['Name'] = request.json['Name']
   store_data['Description'] = request.json['Description']
   store_data['Supplier'] = request.json['Supplier']
   store_data['CategoryId'] = request.json['CategoryId']
   store_data['Price'] = request.json['Price']
   store_data['UnitsInStock'] = request.json['UnitsInStock']
-  send_event_store_data("add_product", store_data)    
+  send_event_store_data("add_medication", store_data)    
   return jsonify(result='Success'), 200
 
-@app.route('/update-product/', methods=['POST'])
-def update_product():
+@app.route('/update-medication/', methods=['POST'])
+def update_medication():
   store_data = {}
-  store_data['Action'] = "Update Product"
-  store_data['ProductId'] = request.json['ProductId']
+  store_data['Action'] = "Update Medication"
+  store_data['MedicationId'] = request.json['MedicationId']
   store_data['Name'] = request.json['Name']
   store_data['Description'] = request.json['Description']
   store_data['Supplier'] = request.json['Supplier']
   store_data['CategoryId'] = request.json['CategoryId']
   store_data['Price'] = request.json['Price']
   store_data['UnitsInStock'] = request.json['UnitsInStock']
-  send_event_store_data("update_product", store_data)    
+  send_event_store_data("update_medication", store_data)    
   return jsonify(result='Success'), 200
 
-@app.route('/delete-product/', methods=['POST'])
-def delete_product():
+@app.route('/delete-medication/', methods=['POST'])
+def delete_medication():
   store_data = {}
-  store_data['Action'] = "Delete Product"
-  store_data['ProductId'] = request.json['ProductId']
-  send_event_store_data("delete_product", store_data)  
+  store_data['Action'] = "Delete Medication"
+  store_data['MedicationId'] = request.json['MedicationId']
+  send_event_store_data("delete_medication", store_data)  
   return jsonify(result='Success'), 200
 
 @app.route('/get-categories/', methods=['GET'])
@@ -212,9 +212,9 @@ def delete_category():
 
 def create_tables():
   db_connection = create_connection()  
-  create_orders_table_sql = 'CREATE TABLE IF NOT EXISTS Products' \
+  create_orders_table_sql = 'CREATE TABLE IF NOT EXISTS Medications' \
         '(id INTEGER PRIMARY KEY AUTOINCREMENT       NOT NULL,' \
-        'ProductId       TEXT       NOT NULL,' \
+        'MedicationId       TEXT       NOT NULL,' \
         'Name            TEXT       NOT NULL,'  \
         'Description     TEXT       NOT NULL,' \
         'Supplier        TEXT       NOT NULL,' \
@@ -236,7 +236,7 @@ def test_tables():
   print("test")
   category_id = 'cat1'
   cursor = db_connection.cursor()
-  cursor.execute("SELECT * from Products WHERE CategoryId==?", (category_id,)) 
+  cursor.execute("SELECT * from Medications WHERE CategoryId==?", (category_id,)) 
   rows = cursor.fetchall()  
   print(len(rows))
   for row in rows:
@@ -257,37 +257,37 @@ def create_connection():
     return None
 
 #Database functions
-def event_add_new_product(product_info):
+def event_add_new_medication(medication_info):
   db_connection = create_connection()
   cursor = db_connection.cursor()  
-  cursor.execute("INSERT INTO Products(ProductId, Name, Description, Supplier, CategoryId, Price, UnitsInStock) Values (?,?,?,?,?,?,?)", 
-             (product_info['ProductId'], 
-             product_info['Name'], product_info['Description'], 
-             product_info['Supplier'], product_info['CategoryId'], 
-             product_info['Price'], product_info['UnitsInStock'],)) 
+  cursor.execute("INSERT INTO Medications(MedicationId, Name, Description, Supplier, CategoryId, Price, UnitsInStock) Values (?,?,?,?,?,?,?)", 
+             (medication_info['MedicationId'], 
+             medication_info['Name'], medication_info['Description'], 
+             medication_info['Supplier'], medication_info['CategoryId'], 
+             medication_info['Price'], medication_info['UnitsInStock'],)) 
   db_connection.commit()
   db_connection.close()    
-  print("event_add_new_product Fail" if cursor.rowcount <= 0 else "event_add_new_product Success")  
+  print("event_add_new_medication Fail" if cursor.rowcount <= 0 else "event_add_new_medication Success")  
 
-def event_update_product(product_info):
+def event_update_medication(medication_info):
   db_connection = create_connection()
   cursor = db_connection.cursor()  
-  cursor.execute("UPDATE Products SET Name=?, Description=?, Supplier=?, CategoryId=?, Price=?, UnitsInStock=? WHERE ProductId=?", 
-             (product_info['Name'], product_info['Description'], 
-             product_info['Supplier'], product_info['CategoryId'], 
-             product_info['Price'], product_info['UnitsInStock'],
-             product_info['ProductId'],)) 
+  cursor.execute("UPDATE Medications SET Name=?, Description=?, Supplier=?, CategoryId=?, Price=?, UnitsInStock=? WHERE MedicationId=?", 
+             (medication_info['Name'], medication_info['Description'], 
+             medication_info['Supplier'], medication_info['CategoryId'], 
+             medication_info['Price'], medication_info['UnitsInStock'],
+             medication_info['MedicationId'],)) 
   db_connection.commit()
   db_connection.close()    
-  print("event_update_product Fail" if cursor.rowcount <= 0 else "event_update_product Success")  
+  print("event_update_medication Fail" if cursor.rowcount <= 0 else "event_update_medication Success")  
 
-def event_delete_product(product_info):
+def event_delete_medication(medication_info):
   db_connection = create_connection()
   cursor = db_connection.cursor()  
-  cursor.execute("DELETE FROM Products WHERE ProductId=?", (product_info['ProductId'],))   
+  cursor.execute("DELETE FROM Medications WHERE MedicationId=?", (medication_info['MedicationId'],))   
   db_connection.commit()  
   db_connection.close()      
-  print("event_delete_product Fail" if cursor.rowcount <= 0 else "event_delete_product Success")  
+  print("event_delete_medication Fail" if cursor.rowcount <= 0 else "event_delete_medication Success")  
 
 def event_add_new_category(category_info):
   db_connection = create_connection()
@@ -326,9 +326,9 @@ send_queue_name = "msdemo_queue_event_store"
 send_exchange_name = "msdemo_exchange_event_store"
 send_routing_key = "msdemo_routingkey_event_store"
 
-receive_queue_name = "msdemo_queue_product"
-receive_exchange_name = "msdemo_exchange_product"
-receive_routing_key = "msdemo_routingkey_product"
+receive_queue_name = "msdemo_queue_medication"
+receive_exchange_name = "msdemo_exchange_medication"
+receive_routing_key = "msdemo_routingkey_medication"
 
 exchange_name_order = "msdemo_exchange_order"
 
@@ -342,12 +342,12 @@ def listener_callback(ch, method, properties, body):
   print("Listener Callback Key:{0} Json:{1}".format(method.routing_key, response_json))
   print(response_json)
   if (method.routing_key == receive_routing_key):
-    if (response_json['Data']['Action'] == "Add New Product"):
-      event_add_new_product(response_json['Data'])
-    elif (response_json['Data']['Action'] == "Update Product"):
-      event_update_product(response_json['Data'])
-    elif (response_json['Data']['Action'] == "Delete Product"):
-      event_delete_product(response_json['Data'])
+    if (response_json['Data']['Action'] == "Add New Medication"):
+      event_add_new_medication(response_json['Data'])
+    elif (response_json['Data']['Action'] == "Update Medication"):
+      event_update_medication(response_json['Data'])
+    elif (response_json['Data']['Action'] == "Delete Medication"):
+      event_delete_medication(response_json['Data'])
     elif (response_json['Data']['Action'] == "Add New Category"):
       event_add_new_category(response_json['Data'])
     elif (response_json['Data']['Action'] == "Update Category"):
@@ -367,7 +367,7 @@ def event_new_order_placed(message):
   data_json = json.loads(message_json['Data'])  
   db_connection = create_connection()      
   cursor = db_connection.cursor()
-  cursor.execute("SELECT * from Products WHERE ProductId==?", (data_json['ProductId'],)) 
+  cursor.execute("SELECT * from Medications WHERE MedicationId==?", (data_json['MedicationId'],)) 
   rows = cursor.fetchall()    
   for row in rows:    
     app.logger.info('event_new_order_placed found row: %s', row)  
@@ -381,8 +381,8 @@ def event_order_finalized(message):
   data_json = json.loads(message_json['Data']) 
   db_connection = create_connection()       
   cursor = db_connection.cursor()
-  print("A: {0} PID: {1}".format(data_json['Amount'], data_json['ProductId']))
-  cursor.execute("UPDATE Products SET UnitsInStock = UnitsInStock - ? WHERE ProductId==?", (data_json['Amount'], data_json['ProductId'],)) 
+  print("A: {0} PID: {1}".format(data_json['Amount'], data_json['MedicationId']))
+  cursor.execute("UPDATE Medications SET UnitsInStock = UnitsInStock - ? WHERE MedicationId==?", (data_json['Amount'], data_json['MedicationId'],)) 
   db_connection.commit()
   db_connection.close()    
   
@@ -426,8 +426,8 @@ def start_sender():
 def send_event_store_data(event_type, data):
   item = {}
   item_data = {}
-  item["Aggregate"] = "Product"
-  item["Topic"] = "msdemo_topic.product.{0}".format(event_type)
+  item["Aggregate"] = "Medication"
+  item["Topic"] = "msdemo_topic.medication.{0}".format(event_type)
   item["Timestamp"] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S:%f")  
   item["Version"] = "1.0"
   item["BUS_ExchangeName"] = receive_exchange_name

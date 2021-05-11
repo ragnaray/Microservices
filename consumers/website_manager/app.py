@@ -1,7 +1,7 @@
 '''
 e-Commerce Website. Users may; 
 - Login, Logout
-- View, Edit, Delete Products and Categories 
+- View, Edit, Delete Medications and Categories 
 - View Patients, Edit Their Credits
 
 2018 Ayhan AVCI. 
@@ -19,75 +19,75 @@ app = Flask(__name__ )
 proxy_address = os.environ["SERVICE_REGISTRY"] 
 
 def login_request(user_name, password):
-  response = requests.post("{}/product/login-user/".format(proxy_address), json={"UserName":user_name, "Password": password} )  
+  response = requests.post("{}/medication/login-user/".format(proxy_address), json={"UserName":user_name, "Password": password} )  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
 def get_categories_request():    
-  response = requests.get("{}/product/get-categories/".format(proxy_address))  
+  response = requests.get("{}/medication/get-categories/".format(proxy_address))  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
 def get_category_details_request(category_id):    
-  response = requests.get("{}/product/get-category-details/".format(proxy_address), json={"CategoryId":category_id})
+  response = requests.get("{}/medication/get-category-details/".format(proxy_address), json={"CategoryId":category_id})
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code    
 
 def add_category_request(category_name):
-  response = requests.post("{}/product/add-new-category/".format(proxy_address), json={"Name":category_name} )  
+  response = requests.post("{}/medication/add-new-category/".format(proxy_address), json={"Name":category_name} )  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code    
 
 def edit_category_request(category_id, category_name):
-  response = requests.post("{}/product/update-category/".format(proxy_address), json={"CategoryId":category_id, "Name":category_name} )  
+  response = requests.post("{}/medication/update-category/".format(proxy_address), json={"CategoryId":category_id, "Name":category_name} )  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code    
 
 def delete_category_request(category_id):
-  response = requests.post("{}/product/delete-category/".format(proxy_address), json={"CategoryId":category_id} )  
+  response = requests.post("{}/medication/delete-category/".format(proxy_address), json={"CategoryId":category_id} )  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code   
 
-def add_product_request(name, description, supplier, category_id, price, unitsinstock):
-  response = requests.post("{}/product/add-new-product/".format(proxy_address), 
+def add_medication_request(name, description, supplier, category_id, price, unitsinstock):
+  response = requests.post("{}/medication/add-new-medication/".format(proxy_address), 
       json={"Name":name, "Description":description, "Supplier":supplier, "CategoryId":category_id, "Price":price, "UnitsInStock":unitsinstock} )  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code    
 
-def edit_product_request(id, name, description, supplier, category_id, price, unitsinstock):
-  response = requests.post("{}/product/update-product/".format(proxy_address), 
-      json={"ProductId":id, "Name":name, "Description":description, "Supplier":supplier, "CategoryId":category_id, "Price":price, "UnitsInStock":unitsinstock} )  
+def edit_medication_request(id, name, description, supplier, category_id, price, unitsinstock):
+  response = requests.post("{}/medication/update-medication/".format(proxy_address), 
+      json={"MedicationId":id, "Name":name, "Description":description, "Supplier":supplier, "CategoryId":category_id, "Price":price, "UnitsInStock":unitsinstock} )  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code    
 
-def delete_product_request(product_id):
-  response = requests.post("{}/product/delete-product/".format(proxy_address), json={"ProductId":product_id} )  
+def delete_medication_request(medication_id):
+  response = requests.post("{}/medication/delete-medication/".format(proxy_address), json={"MedicationId":medication_id} )  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code   
 
-def get_all_products_request():    
-  response = requests.get("{}/product/get-all-products/".format(proxy_address))  
+def get_all_medications_request():    
+  response = requests.get("{}/medication/get-all-medications/".format(proxy_address))  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
-def get_product_details_request(product_id):    
-  response = requests.get("{}/product/get-product-details/".format(proxy_address), json={"ProductId":product_id})
+def get_medication_details_request(medication_id):    
+  response = requests.get("{}/medication/get-medication-details/".format(proxy_address), json={"MedicationId":medication_id})
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code  
 
-def get_products_of_category_request(category_id):
-  response = requests.get("{}/product/get-products/".format(proxy_address), json={"CategoryId":category_id} )  
+def get_medications_of_category_request(category_id):
+  response = requests.get("{}/medication/get-medications/".format(proxy_address), json={"CategoryId":category_id} )  
   if response.status_code == 200:
     return json.loads(response.content.decode('utf-8')), 200
   return "service call fail", response.status_code   
@@ -196,32 +196,32 @@ def add_category():
     add_category_request(request.form['categoryname'])
   return render_template('addcategory.html')
 
-@app.route("/view-products/<id>", methods=['GET']) 
-def view_products(id):      
+@app.route("/view-medications/<id>", methods=['GET']) 
+def view_medications(id):      
   if (check_login() == False):
     flash("User not logged in") 
     return home()
-  result, code = get_products_of_category_request(id)    
-  product_list = {}
+  result, code = get_medications_of_category_request(id)    
+  medication_list = {}
   if (code == 200):
     if (str(result['result']['Status']) == "Success"):  
-      product_list = result['result']['Products']      
-  return render_template('products.html', products=product_list)
+      medication_list = result['result']['Medications']      
+  return render_template('medications.html', medications=medication_list)
 
-@app.route("/products", methods=['GET']) 
-def products():    
+@app.route("/medications", methods=['GET']) 
+def medications():    
   if (check_login() == False):
     flash("User not logged in") 
     return home()
-  result, code = get_all_products_request()    
-  product_list = {}
+  result, code = get_all_medications_request()    
+  medication_list = {}
   if (code == 200):
     if (str(result['result']['Status']) == "Success"):  
-      product_list = result['result']['Products']      
-  return render_template('products.html', products=product_list)
+      medication_list = result['result']['Medications']      
+  return render_template('medications.html', medications=medication_list)
 
-@app.route("/add-product", methods=['GET', 'POST']) 
-def add_product():    
+@app.route("/add-medication", methods=['GET', 'POST']) 
+def add_medication():    
   if (check_login() == False):
     flash("User not logged in") 
     return home()     
@@ -231,21 +231,21 @@ def add_product():
     if (str(result['result']['Status']) == "Success"):  
       category_list = result['result']['Categories']        
   if request.method == 'POST':
-    add_product_request(
-      request.form['productname'], request.form['description'], request.form['supplier'],
+    add_medication_request(
+      request.form['medicationname'], request.form['description'], request.form['supplier'],
       request.form['select_category'], request.form['price'], request.form['unitsinstock'])        
-  return render_template('addproduct.html', categories=category_list)  
+  return render_template('addmedication.html', categories=category_list)  
 
-@app.route("/edit-product", methods=['GET', 'POST']) 
-def edit_product():    
+@app.route("/edit-medication", methods=['GET', 'POST']) 
+def edit_medication():    
   if (check_login() == False):
     return home()
   if request.method == 'POST':
-    edit_product_request(
-      request.form['productid'], request.form['productname'], request.form['description'], request.form['supplier'],
+    edit_medication_request(
+      request.form['medicationid'], request.form['medicationname'], request.form['description'], request.form['supplier'],
       request.form['select_category'], request.form['price'], request.form['unitsinstock']) 
     return home()  
-  result, code = get_product_details_request(request.args.get('id'))
+  result, code = get_medication_details_request(request.args.get('id'))
   if (code == 200):
     if (str(result['result']['Status']) == "Success"):        
       result_cat, code_cat = get_categories_request()      
@@ -253,21 +253,21 @@ def edit_product():
       if (code_cat == 200):
         if (str(result_cat['result']['Status']) == "Success"):  
           category_list = result_cat['result']['Categories']        
-      return render_template('editproduct.html', product=result['result']['Product'], categories=category_list)
+      return render_template('editmedication.html', medication=result['result']['Medication'], categories=category_list)
   return home()
 
-@app.route("/delete-product", methods=['GET', 'POST']) 
-def delete_product():    
+@app.route("/delete-medication", methods=['GET', 'POST']) 
+def delete_medication():    
   if (check_login() == False):
     return home()
   if request.method == 'POST':
-    delete_product_request(request.form['productid'])    
+    delete_medication_request(request.form['medicationid'])    
     return home()
-  result, code = get_product_details_request(request.args.get('id'))
+  result, code = get_medication_details_request(request.args.get('id'))
   if (code == 200):
     if (str(result['result']['Status']) == "Success"):  
-      product_name = result['result']['Product'][2]
-      return render_template('deleteproduct.html', product_id=request.args.get('id'), product_name=product_name)
+      medication_name = result['result']['Medication'][2]
+      return render_template('deletemedication.html', medication_id=request.args.get('id'), medication_name=medication_name)
   return home()
 
 @app.route("/patients", methods=['GET']) 

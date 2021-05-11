@@ -13,8 +13,8 @@
       <tr>
         <th>GUID</th>
         <th>USERID</th>
-        <th>PRODUCTID</th>     
-        <th>PRODUCTNAME</th>      
+        <th>MEDICATIONID</th>     
+        <th>MEDICATIONNAME</th>      
         <th>PRICE</th>      
         <th>ORDERSTATUS</th>      
         <th>STOCKSTATUS</th>      
@@ -27,8 +27,8 @@
       <tr>
         <td class="align-middle">{{ order['GUID'] }}</td>
         <td class="align-middle">{{ order['USERID'] }}</td>
-        <td class="align-middle">{{ order['PRODUCT'] }}</td> 
-        <td class="align-middle">{{ order['PRODUCTNAME'] }}</td> 
+        <td class="align-middle">{{ order['MEDICATION'] }}</td> 
+        <td class="align-middle">{{ order['MEDICATIONNAME'] }}</td> 
         <td class="align-middle">{{ order['PRICE'] }}</td> 
         <td class="align-middle">{% if order['ORDERSTATUS']==0 %}PENDING{% elif order['ORDERSTATUS']==1 %}CANCELED{% elif order['ORDERSTATUS']==2 %}APPROVED{% elif order['ORDERSTATUS']==3 %}FINALIZED{%else%}order['ORDERSTATUS']{%endif%}</td>                            
         <td class="align-middle">{% if order['STOCKSTATUS']==0 %}PENDING{% elif order['STOCKSTATUS']==1 %}RECEIVED{% elif order['STOCKSTATUS']==2 %}DENIED{% elif order['STOCKSTATUS']==3 %}APPROVED{%else%}order['STOCKSTATUS']{%endif%}</td>  

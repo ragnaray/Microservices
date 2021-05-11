@@ -1,7 +1,7 @@
 #!/bin/sh
 
-cd product
+cd medication
 echo "building"
 python3 -m pip install -r requirements.txt --no-cache-dir
 echo "running"
-python product.py
+python medication.py

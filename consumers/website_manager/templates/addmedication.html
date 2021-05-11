@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h2>{% block title %}Add New Product{% endblock %}</h2>
+  <h2>{% block title %}Add New Medication{% endblock %}</h2>
 {% endblock %}
   
 {% block content %}
@@ -9,11 +9,11 @@
 <div class="w3-container">    
   <div class="w3-card-4">
     <div class="w3-container w3-green">
-      <h3>Enter product details</h3>
+      <h3>Enter medication details</h3>
     </div>
-    <form action="/add-product" method="POST" class="w3-container">      
-      <p><label for="productname">Product Name</label>
-      <input name="productname" id="productname" class="w3-input  w3-border" required></p> 
+    <form action="/add-medication" method="POST" class="w3-container">      
+      <p><label for="medicationname">Medication Name</label>
+      <input name="medicationname" id="medicationname" class="w3-input  w3-border" required></p> 
       <p><label for="select_category">Category</label>
       <select name="select_category" class="w3-select w3-border" >
         {% for category in categories %}

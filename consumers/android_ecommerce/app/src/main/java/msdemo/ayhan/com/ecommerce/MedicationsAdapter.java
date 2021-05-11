@@ -19,15 +19,15 @@ import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 
-public class ProductsAdapter extends ArrayAdapter<ProductModel> {
+public class MedicationsAdapter extends ArrayAdapter<MedicationModel> {
 
-    private ArrayList<ProductModel> dataSet;
+    private ArrayList<MedicationModel> dataSet;
     Context mContext;
     View mView;
 
     // 1
-    public ProductsAdapter(ArrayList<ProductModel> data, Context context, View view) {
-        super(context, R.layout.listview_products_row, data);
+    public MedicationsAdapter(ArrayList<MedicationModel> data, Context context, View view) {
+        super(context, R.layout.listview_medications_row, data);
         this.dataSet = data;
         this.mContext=context;
         this.mView = view;
@@ -45,7 +45,7 @@ public class ProductsAdapter extends ArrayAdapter<ProductModel> {
     }
 
     @Override
-    public ProductModel getItem(int position) {
+    public MedicationModel getItem(int position) {
         return dataSet.get(position);
     }
 
@@ -54,16 +54,16 @@ public class ProductsAdapter extends ArrayAdapter<ProductModel> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.listview_products_row, parent, false);
-        TextView txt_product_name = rowView.findViewById(R.id.txt_product_name);
-        TextView txt_product_price = rowView.findViewById(R.id.txt_product_price);
-        Button btn_product_price = rowView.findViewById(R.id.txt_product_buy);
+        View rowView = inflater.inflate(R.layout.listview_medications_row, parent, false);
+        TextView txt_medication_name = rowView.findViewById(R.id.txt_medication_name);
+        TextView txt_medication_price = rowView.findViewById(R.id.txt_medication_price);
+        Button btn_medication_price = rowView.findViewById(R.id.txt_medication_buy);
 
-        ProductModel item = dataSet.get(position);
-        txt_product_name.setText(item.getName());
-        txt_product_price.setText(Float.toString(item.getPrice()));
+        MedicationModel item = dataSet.get(position);
+        txt_medication_name.setText(item.getName());
+        txt_medication_price.setText(Float.toString(item.getPrice()));
 
-        btn_product_price.setOnClickListener((View v) -> {
+        btn_medication_price.setOnClickListener((View v) -> {
             //LinearLayout vwParentRow = (LinearLayout)v.getParent();
             //TextView child = (TextView)vwParentRow.getChildAt(0);
             PlaceOrder(dataSet.get(position));
@@ -71,9 +71,9 @@ public class ProductsAdapter extends ArrayAdapter<ProductModel> {
         });
         return rowView;
     }
-    private void PlaceOrder(ProductModel product_item) {
+    private void PlaceOrder(MedicationModel medication_item) {
         try {
-            //json={"ProductId":id, "ProductName":name, "PatientId":session['username'], "TimeStamp":time.strftime("%Y-%d-%m %H:%M:%S", time.localtime())})
+            //json={"MedicationId":id, "MedicationName":name, "PatientId":session['username'], "TimeStamp":time.strftime("%Y-%d-%m %H:%M:%S", time.localtime())})
             SharedPreferences sharedPref = ((Activity)mContext).getPreferences(Context.MODE_PRIVATE);
             String user_name = sharedPref.getString(mContext.getString(R.string.saved_login_name), null);
             if (user_name == null) {
@@ -87,8 +87,8 @@ public class ProductsAdapter extends ArrayAdapter<ProductModel> {
 
 
             JsonObject post_json = new JsonObject();
-            post_json.addProperty("ProductId", product_item.Code);
-            post_json.addProperty("ProductName", product_item.Name);
+            post_json.addProperty("MedicationId", medication_item.Code);
+            post_json.addProperty("MedicationName", medication_item.Name);
             post_json.addProperty("PatientId", user_name);
             post_json.addProperty("TimeStamp", formated_date);
 

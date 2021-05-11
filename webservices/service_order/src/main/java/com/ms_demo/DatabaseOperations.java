@@ -69,14 +69,14 @@ public class DatabaseOperations {
             "(ID SERIAL PRIMARY KEY        NOT NULL," +
             " GUID           TEXT       NOT NULL, " +
             " USERID         TEXT       NOT NULL, " +                        
-            " PRODUCT        TEXT       NOT NULL, " +
+            " MEDICATION        TEXT       NOT NULL, " +
             " PRICE          FLOAT      NOT NULL, " +
             " ORDERSTATUS    INT        NOT NULL, " +        
             " STOCKSTATUS    INT        NOT NULL, " +          
             " CREDITSTATUS   INT        NOT NULL, " +      
             " CREDIT         FLOAT      NOT NULL, " +    
             " STOCK          INT        NOT NULL, " +    
-            " PRODUCTNAME    TEXT       NOT NULL, " +      
+            " MEDICATIONNAME    TEXT       NOT NULL, " +      
             " TIME           TEXT       NOT NULL)";
          stmt.executeUpdate(sql);
          stmt.close();        
@@ -88,7 +88,7 @@ public class DatabaseOperations {
       System.out.println("Table created successfully");
       return true;
    }
-   public Boolean InsertOrder(String str_orderid, String str_productid, String str_patientid, String str_price, String str_timestamp, String str_product_name) {
+   public Boolean InsertOrder(String str_orderid, String str_medicationid, String str_patientid, String str_price, String str_timestamp, String str_medication_name) {
     Float price;
     try {
       price = Float.parseFloat(str_price);
@@ -109,11 +109,11 @@ public class DatabaseOperations {
         }
       }          
                  
-       String sql = "INSERT INTO ORDERS(GUID, USERID, PRODUCT, PRICE, ORDERSTATUS, STOCKSTATUS, CREDITSTATUS, TIME, CREDIT, STOCK, PRODUCTNAME) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+       String sql = "INSERT INTO ORDERS(GUID, USERID, MEDICATION, PRICE, ORDERSTATUS, STOCKSTATUS, CREDITSTATUS, TIME, CREDIT, STOCK, MEDICATIONNAME) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
        stmt = connection.prepareStatement(sql);
        stmt.setString(1, str_orderid);
        stmt.setString(2, str_patientid);
-       stmt.setString(3, str_productid);        
+       stmt.setString(3, str_medicationid);        
        stmt.setFloat(4, price);
        stmt.setInt(5, ORDER_STATUS_PENDING);
        stmt.setInt(6, PRICEANDSTOCK_STATUS_PENDING);
@@ -121,7 +121,7 @@ public class DatabaseOperations {
        stmt.setString(8, str_timestamp); 
        stmt.setFloat(9, 0); 
        stmt.setInt(10, 0); 
-       stmt.setString(11, str_product_name);
+       stmt.setString(11, str_medication_name);
        System.out.println("ALERT ALERT" + str_timestamp + " ALERT ALERT");
        stmt.executeUpdate();
        stmt.close();        
@@ -250,8 +250,8 @@ public class DatabaseOperations {
         JsonObject row = new JsonObject();
         row.addProperty("GUID", query_results.getString("GUID"));
         row.addProperty("USERID", query_results.getString("USERID"));
-        row.addProperty("PRODUCT", query_results.getString("PRODUCT"));
-        row.addProperty("PRODUCTNAME", query_results.getString("PRODUCTNAME"));
+        row.addProperty("MEDICATION", query_results.getString("MEDICATION"));
+        row.addProperty("MEDICATIONNAME", query_results.getString("MEDICATIONNAME"));
         row.addProperty("PRICE", query_results.getFloat("PRICE"));
         row.addProperty("ORDERSTATUS", query_results.getInt("ORDERSTATUS"));
         row.addProperty("STOCKSTATUS", query_results.getInt("STOCKSTATUS"));
